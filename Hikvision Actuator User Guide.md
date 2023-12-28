@@ -1,4 +1,4 @@
-# HikVision Actuator for Input Alarms and Motion Detection
+# Hikvision Actuator for Input Alarms and Motion Detection
 # User Guide - BETA Version 1.0
 ### Copyright: Thomas R Schmidt, Wildwood IL
 Unauthorized use or publication is strictly prohibited.
