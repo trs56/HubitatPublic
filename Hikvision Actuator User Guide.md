@@ -70,15 +70,15 @@ During normal operation, zStatus should remain OK at all times. All commands pin
  
 If you change the credentials of the hubitat account on the camera and forget to change them here, the next time a command is run, zStatus will be set to CRED and operation suspended until you Save Preferences to fix the mis-match.
  
-If any unexpected errors occur, zStatus will go to ERR and operation suspended until the problem is resolved and Save Preferences is run. These errors may require a call to the help desk.
+If any unexpected HTTP GET/PUT errors occur, zStatus will go to ERR and operation suspended until the problem is resolved and Save Preferences is run. These errors may require a call to the help desk.
 ## Errors and Troubleshooting
 The driver logs all of its activity and catches all errors from the http get/put methods but does not catch Groovy/Java script errors involving bad data.
  
-So if nothing is working, check the logs. These are the errors I really need to see. The code is making certain assumptions about the data it is receiving and processing. If anything changes in that stream, bad things don't happen, nothing does. And that's a problem when you're talking home security.
+So if it stops working, check the logs. The code is making certain assumptions about the data it is receiving and processing. If anything changes in that stream, bad things don't happen, nothing does. And that's a problem when you're talking home security.
  
-So when first starting out, check the log frequently to see what it is saying. Debug logging is only used for dumping the XML data that is returned by the camera in response to a GET request. The driver is relying on the translation of the XML data returned by the camera into to a GPath object in Groovy.
+Debug logging is used for dumping the converted XML data that is returned by the camera in response to a GET request. With this release, the driver is relying on the translation of the XML data returned by the camera into a GPath object in Groovy, which is quirky and presents challenges in determining how to reference certain elements in the Gpath in order to obtain it's value.
  
-Fortunately, the XML Schemas provided by the HIKVision CGI won't change, but there may be newer or older cameras out there that send back a slightly different XML response that could change the way Groovy interprets the structure, which could require a change to the way the code references it.
+Fortunately, the XML Schemas provided by the HIKVision CGI won't change, but there may be newer or older cameras out there that send back a slightly different XML response that could change the way Groovy interprets the structure, which could require a change to the way the code references the data element it needs.
 ## Security Warning
 This driver uses HTTP Basic Authentication to login to your camera. Your encoded credentials are saved and displayed in the Data section of the device in the format required for this method of authentication.
 ## Feedback and Contact for Support
