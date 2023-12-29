@@ -47,9 +47,9 @@ You are now ready to configure your camera for operation with HE using the Hikvi
  
 Whenever you Save Preferences, the driver will validate your camera by first pinging the ip address and then sending a GET request for the data from /System/deviceInfo using the Credentials you entered. When these checks fail, an error message will be displayed in the zStatus attribute and you will need fix it and try again. If you can't get past this step, you may need to call the help desk to report that you have a Hikvision camera that is not being recognized.
  
-IF all is well, it will say Yay!. Your camera has been validated and is ready for operation.
+If all is well, it will say Yay!. Your camera has been validated and is ready for operation.
  
-If the a motion detection feature is not available on your camera, (i.e the URL Path was not found), its status will be set to NA and the on/off commands for that feature will be disabled.
+If a motion detection feature is not available on your camera, (i.e the URL Path was not found), its status will be set to NA and the on/off commands for that feature will be disabled.
  
 You may now start running commands and create test rules to validate its operation. You should do this before you deploy into your home security setup and the arming of your house for security purposes.
 
@@ -57,7 +57,7 @@ Start with turning your motion sensors on/off and watch the change in state. Con
 
 Turn the Alarm On to confirm you receive the notifications you have configured for the Alarm Input Event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
 
-DO NOT forget to turn the Alarm OFF in your rules when conditions warrant or go back to normal. So if you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off.
+DO NOT forget to turn the Alarm OFF in your rules when conditions go back to normal. So if you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off.
 
 Get Status will get the current state of all features from the camera and update the status attributes on the device, if needed. This command is in place for testing and development purposes and may be removed when the driver comes out of beta for general release. Do not call Get Status from any rules.
 ### In Summary
