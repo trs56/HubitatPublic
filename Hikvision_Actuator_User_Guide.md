@@ -3,9 +3,9 @@
 ### Copyright: Thomas R Schmidt, Wildwood IL
 Unauthorized use or publication is strictly prohibited.
 ## Introduction
-This device driver implements the HE Actuator capability. It allows you to trigger Alarm Input Events and enable/disable Motion Detection and PIR Sensors on your Hikvision cameras by running its custom commands from your rules and apps.
+This device driver implements the HE Actuator capability. It allows you to trigger Alarm Input Events and enable/disable Motion Detection and PIR Sensor on your Hikvision cameras by running its custom commands from your rules and apps.
  
-To use the Alarm Input trigger, your camera must have wired Alarm I/O ports that are accessible and not in use. Since the first thing you will need to do is find a short piece of thin wire and connect the two ports, out to in. This is required since the driver is only allowed to trigger Alarm Out when using the Hikvision CGI. It does not not allow apps to trigger Alarm In. The only way is to put voltage on the line, and that is all triggering Alarm Out does. You can test this yourself by connecting the ports and triggering a manual alarm from the camera.
+To use the Alarm Input trigger, your camera must have wired Alarm I/O ports that are accessible and not in use. Since the first thing you will need to do is find a short piece of thin wire and connect the two positive(+) ports. This is required since the driver is only allowed to trigger Alarm Out when using the Hikvision CGI. It does not not allow apps to trigger Alarm In. The only way is to put voltage on the line, and that is all triggering Alarm Out does. You can test this yourself by connecting the ports and triggering a manual alarm from the camera.
  
 So when you call the command to set Alarm On from your rules, the driver will trigger Alarm Out and the voltage will flow. The Alarm Input Event on your camera will then fire, provided it is enabled and armed.
  
