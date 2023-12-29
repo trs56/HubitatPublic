@@ -9,9 +9,9 @@ To use the Alarm Input trigger, your camera must have wired Alarm I/O ports that
  
 So when you call the command to set Alarm On from your rules, the driver will trigger Alarm Out and the voltage will flow. The Alarm Input Event on your camera will then fire, provided it is enabled and armed.
  
-This allows you to trigger alarms on your cameras whenever conditions warrant and use HE to control the arming schedule for Motion Detection and PIR sensors. The driver will report on the enabled/disabled state of Line Crossing and Intrusion Events but does not allow you to change their state at this time (next release).
- 
-Nor with this release does it allow you to change the enabled/disabled state of the Alarm Input Event. You control that and its arming schedule.
+This allows you to trigger alarms on your cameras whenever conditions warrant and use HE to control the arming schedule for Motion Detection and PIR sensors.
+
+This release does not include the ability to change the enabled/disabled state of Line Crossing and Intrusion Events. That functionality is planned for a future release. Nor with this release does it allow you to change the enabled/disabled state of the Alarm Input Event. You control that and its arming schedule.
  
 ## Camera Configuration
 To use the driver, your camera must be configured as follows:
