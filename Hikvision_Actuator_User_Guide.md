@@ -22,11 +22,11 @@ Please note that the path to the setting on your camera may be different.
 2: Network > Advanced > Integration Protocol >
    Hikvision-CGI Enabled, Authentication=digest/basic
  
-3: Optional Operator account with the remote parameter/settings and remote notify options selected.  
-    You can use your admin account, but I recommend that you create an Operator for Hubitat. You could lock out your admin account if credentials change and you forget to change them here. Create a hubitat account.
+3: Optional Operator account with the Remote Parameters/Settings and Remote Notify options selected.   
+You can use your admin account, but it is recommended that you create an Operator account for Hubitat.
  
-4: Basic and Smart Events must not be configured to trigger Alarm Out.  
-   Check Linkage Methods for all Basic and Smart Events and make sure Trigger Alarm Out is NOT selected. HE is now in control.   
+4: Basic and Smart Events must not be configured to trigger Alarm Out.   
+Check Linkage Methods for all Basic and Smart Events to make sure this option is not selected. HE is now in control.   
  
 5: Enable Alarm Input Handling in Basic Events - Alarm Input   
 Set Alarm Type to NO (is default, normally open, no voltage)   
@@ -43,29 +43,27 @@ You are now ready to configure your camera for operation with HE.
 
 2: Enter your camera ip address, port and credentials. Click Save.
  
-Whenever you Save Preferences, the driver attempts to validate your camera settings by first pinging the ip address and then sending a GET request for the data from /System/deviceInfo using the Credentials you entered. If these checks fail, an error message will be displayed in the zStatus attribute and you will need fix it and try again. If you can't get past this step, you may need to call the help desk (me:).
+Whenever you Save Preferences, the driver will validate your camera settings by first pinging the ip address and then sending a GET request for the data from /System/deviceInfo using the Credentials you entered. If these checks fail, an error message will be displayed in the zStatus attribute and you will need fix it and try again. If you can't get past this step, you may need to call the help desk.
  
-The driver tries to walk you through this process using feedback in zStatus but as I've come to discover in HE, changes to attributes don't always refresh on screen when the sendEvent is issued. Sometimes you have to refresh or get out and come back in. Once you get it to it say "Yay!", you are good to go.
+If errors do occurs, the driver tries will provide feedback in zStatus but as I've come to discover in HE, changes to attributes don't always refresh on screen when the sendEvent is issued. Sometimes you have to refresh or get out and come back in. Once you get it to it say "Yay!", your camera has been validated and is ready for operation.
  
-If a Motion Detection or PIR feature is not available on your camera, (i.e the URL Path was not found), its status will be set to NA and the on/off commands for that feature will be disabled.
+If a the PIR feature is not available on your camera, (i.e the URL Path was not found), its status will be set to NA and the on/off commands for that feature will be disabled.
  
-You may now start running commands, just don't click Get Status repeatedly. Instead, turn your sensors on/off and watch the state change. Getting all status is mainly there for when you Save Preferences.
- 
-Make sure everything works. OK is the normal response. Try enabling a feature that is already enabled on the camera, see what you get. Which is nothing, unless you go to the log, or the states are out of sync.
- 
-Turn the Alarm On and make sure you get the notifications you have configured for the Alarm Input Event. If you have a camera with a siren, check that option under Linkage Methods to see just how fast the trigger is. Just don't forget to turn the Alarm off. Same thing applies to your rules and apps. Don't forget to turn the lights off.
- 
-Now, let your imagination run wild and figure out something to do with this thing. I can't offer much more than that.
- 
-I like it because it gives me the ability to trigger my cameras with more reliable and consistent PIR sensors, or any other sensor. So when I'm away and my house is "fully armed", I can trigger all of my cameras if any one of my security sensors goes off. The possibilities are endless.
- 
-I also like the Hikvision app and email notifications and having the ability to create playback markers in a continuous recording stream for any event I want. (side note: I use onboard recording, no NVR)
+You may now start running commands and create test rules to validate its operation. You should do this before you deploy into your home security setup and the arming of your house for security purposes.
+
+Start with turning your motion sensors on/off and watch the change in state. Confirm the change in state on your camera.
+
+Turn the Alarm On to confirm you receive the notifications you have configured for the Alarm Input Event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
+
+DO NOT forget to turn the Alarm OFF in your rules when conditions warrant or go back to normal. So if you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off.
+
+This driver now gives you the flexibility to trigger your cameras with more reliable and consistent PIR sensors, or any other sensor. So for example, when you're away and your house is armed, you can trigger all of your cameras if any one of your security sensors goes off.
+
+You are now in complete control of when Alarms can be triggerd on your cameras and when Motion Detection features are enabled. Once you're up and running and have validated its operation, this driver will run quietly in the background, so you can rest assured it will perform the actions you need it to when called upon.
  
 ## State Changes During Operation
 The status attributes change when a command is run that triggers it. The driver always gets the current state from the camera first, to determine if a change in state is actually needed, and then updates the status attribute to the new state, as needed, using sendEvent.
 
-State changes for Intrusion and Line Cross are only updated when Get Status is run. Next release will have code to control them. 
- 
 During normal operation, zStatus should remain OK at all times. All commands ping the ip first to see if it is online. If the ping fails, zStatus will go to OFF and remain OFF until a command is run that sees it back online.
  
 If you change the credentials of the hubitat account on the camera and forget to change them here, the next time a command is run, zStatus will be set to CRED and operation suspended until you Save Preferences to fix the mis-match.
