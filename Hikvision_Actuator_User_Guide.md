@@ -2,6 +2,8 @@
 # User Guide - BETA Version 0.1
 ### Copyright: Thomas R Schmidt, Wildwood IL
 Unauthorized use, copy or publication is prohibited.
+## For BETA Testers
+While in BETA, the code is subject to frequent changes. Each commit of the code to my repository will include a description of the changes being made. Most will be minor. If a major change is made, I will post it on the Community Forum, Custom Drivers.
 ## Introduction
 This device driver implements the HE Actuator capability. It allows you to trigger Alarm Input Events and enable/disable Motion Detection and PIR Sensors on your Hikvision cameras by running its custom commands from your rules and apps.
  
