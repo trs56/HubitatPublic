@@ -5,15 +5,15 @@ Unauthorized use, copy or publication is prohibited.
 ## For BETA Testers
 While in BETA, the code is subject to frequent changes. Each commit of the code in my repository will include a brief description of the changes being made. Most will be minor and noted in the change log. If a major change is made, I will post it on the Community Forum, Custom Drivers.
 ## Prerequisites
-This driver is unable to control cameras that are directly connected to a NVR. To use the driver, your cameras much be on a switch that is connected to your router.
+This driver is unable to control cameras that are directly connected to a NVR. Your cameras much be on a switch that is connected to your router and configured with a static ip address.
 
-To use the key feature of this driver, which is to trigger Alarm Input Events on your camera using rules in HE, your camera must have wired Alarm I/O ports that are accessible and not in use. Because, the first thing you will need to do is jump the alarm in/out positive ports with a jumper wire. This is required since the driver is only allowed to trigger Alarm Out when using the Hikvision CGI. The CGI does not not allow apps to trigger Alarm In. The only way to trigger Alarm In is to put voltage on the wire, which is all triggering Alarm Out does.
+To use the key feature of this driver, which is to trigger Alarm Input Events on your camera using rules in HE, your camera must have wired Alarm I/O ports that are accessible and not in use. Because, the first thing you will need to do is jump the alarm in/out positive ports with a jumper wire. This is required since the driver is only allowed to trigger Alarm Out when using the Hikvision CGI. The CGI does not not allow apps to trigger Alarm In. The only way to trigger Alarm In is to put voltage on the wire, which is all triggering Alarm Out does. You can and should test this yourself first by connecting the ports and triggering a manual alarm from the camera, then turn it off.
 
 This driver also requires specific camera settings, which are described below.
 ## Introduction
 This device driver implements the HE Actuator capability. It allows you to trigger Alarm Input Events and enable/disable Motion Detection and PIR Sensors on your Hikvision cameras by running its custom commands from your rules and apps.
  
-So when you call the command to set Alarm On from your rules, the driver will trigger Alarm Out and the voltage will flow. The Alarm Input Event on your camera will then fire, provided it is enabled and armed.  You can and should test this yourself by connecting the ports and triggering a manual alarm from the camera.
+So when you call the command to set Alarm On from your rules, the driver will trigger Alarm Out and the voltage will flow. The Alarm Input Event on your camera will then fire, provided it is enabled and armed.  
  
 This allows you to trigger alarms on your cameras whenever conditions warrant and use HE to control the arming schedule for Motion Detection and PIR sensors.
 
@@ -42,8 +42,6 @@ Set desired Linkage Methods (email, notify, record)
     
 6: Connect the Alarm In/Out ports with a small jumper wire.   
 
-7: Your camera must be configured with a static ip address, or a reserved address on your router if using DHCP.
- 
 You are now ready to configure your camera for operation with HE using the Hikvision Actuator.
  
 ## Device Configuration and Operation
@@ -82,15 +80,13 @@ If any unexpected HTTP GET/PUT errors occur, zStatus will go to ERR and operatio
 ## Errors and Troubleshooting
 The driver logs all of its activity and catches all errors from the http get/put methods but does not catch Groovy/Java script errors involving bad data.
  
-So if it stops working, check the logs. The code is making certain assumptions about the data it is receiving and processing. If anything changes in that stream, bad things don't happen, nothing does. And that's a problem when it comes to home security.
+If the driver stops working, check the logs and call the help desk.
  
-Debug logging is used for dumping the converted XML data that is returned by the camera in response to a GET request. With this release, the driver is relying on the translation of the XML data returned by the camera into a GPath object in Groovy, which is quirky and presents challenges in determining how to reference certain elements in the Gpath in order to obtain it's value.
- 
-Fortunately, the XML Schemas provided by the HIKVision CGI won't change, but there may be newer or older cameras out there that send back a slightly different XML response that could change the way Groovy interprets the structure, which could require a change to the way the code references the data element it needs.
+Debug logging is used for dumping the converted XML data that is returned by the camera in response to a GET request. With this release, the driver is relying on the translation of the XML into a GPath object in Groovy. This will be useful for debugging groovy script errors involving bad data if the structure of the Gpath the driver is expecting to receive changes, perhaps caused by newer or older versions of firmware. 
 ## Security Warning
 This driver uses HTTP Basic Authentication to login to your camera. Your encoded credentials are saved and displayed in the Data section of the device in the format required for this method of authentication.
 ## Feedback and Contact for Support
-Please contact me through the Hubitat Community. I look forward to hearing your feedback.  
+Please contact me through the Hubitat Community, TomS or trs56 on github. Please be aware that I may not be able to get back to you instantly. I do look forward to hearing your feedback.  
 Thanks for checking this out.
 ## Disclaimers
 USE AT YOUR OWN RISK
