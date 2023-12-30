@@ -16,6 +16,7 @@
 // Change Log
 // Date        Version        Release Notes
 // 12-28-2023  BETA 0.1       Original Public Beta Release
+// 12-30-2023                 Added Firmware version to device Data and renamed two Data vars
 //******************************************************************************
 metadata {
     definition (name: "Hikvision Actuator for Input Alarms and Motion Detection", 
@@ -101,8 +102,9 @@ void updated() {
     device.updateSetting("devicePort", [value:"${devicePort}", type:"string"])
     device.updateSetting("deviceCred", [value:"${deviceCred}", type:"string"])
     // remove all device data values
-    device.removeDataValue("CameraName")
-    device.removeDataValue("CameraModel")
+    device.removeDataValue("Name")
+    device.removeDataValue("Model")
+    device.removeDataValue("Firmware")
     // save the new credentials
     device.updateDataValue("CamID",deviceCred.bytes.encodeBase64().toString())
     log.info "Pinging IP: " + deviceIP
@@ -329,17 +331,25 @@ def GetSysInfo(String Path) {
     if (strMsg == "OK") {
         def cname = xml.deviceName.text()
         def cmodel = xml.model.text()
+        def firmware = xml.firmwareVersion.text()
+    
         if (cname != "") {
-            log.info "CameraName: " + cname
-            device.updateDataValue("CameraName",cname)
+            log.info "Camera Name: " + cname
+            device.updateDataValue("Name",cname)
         } else {
-            device.removeDataValue("CameraName")
+            device.removeDataValue("Name")
         }
         if (cmodel != "") {
-            log.info "CameraModel: " + cmodel
-            device.updateDataValue("CameraModel",cmodel)
+            log.info "Camera Model: " + cmodel
+            device.updateDataValue("Model",cmodel)
         } else {
-            device.removeDataValue("CameraModel")
+            device.removeDataValue("Model")
+        }
+        if (fwversion != "") {
+            log.info "Firmware: " + fwversion
+            device.updateDataValue("Firmware",firmware)
+        } else {
+            device.removeDataValue("Firmware")
         }
         return("OK")
     } else {
