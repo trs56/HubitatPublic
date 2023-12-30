@@ -5,7 +5,7 @@ Unauthorized use, copy or publication is prohibited.
 ## For BETA Testers
 While in BETA, the code is subject to frequent changes. Each commit of the code in my repository will include a brief description of the changes being made. Most will be minor and noted in the change log. If a major change is made, I will post it on the Community Forum, Custom Drivers.
 ## Prerequisites
-This driver is unable to control cameras that are directly connected to a NVR. Your cameras much be on a switch that is connected to your router and configured with a static ip address.
+This driver is unable to control cameras that are directly connected to a NVR. Your cameras must be on a switch that is connected to your router and configured with a static ip address.
 
 To use the key feature of this driver, which is to trigger Alarm Input Events on your camera using rules in HE, your camera must have wired Alarm I/O ports that are accessible and not in use. Because, the first thing you will need to do is jump the alarm in/out positive ports with a jumper wire. This is required since the driver is only allowed to trigger Alarm Out when using the Hikvision CGI. The CGI does not not allow apps to trigger Alarm In. The only way to trigger Alarm In is to put voltage on the wire, which is all triggering Alarm Out does. You can and should test this yourself first by connecting the ports and triggering a manual alarm from the camera, then turn it off.
 
