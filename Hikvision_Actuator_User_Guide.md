@@ -65,7 +65,7 @@ DO NOT forget to turn the Alarm OFF in your rules when conditions go back to nor
 
 Get Status will get the current state of all features from the camera and update the status attributes on the device, if needed. This command is in place for testing and development purposes and may be removed when the driver comes out of beta for general release. Do not call Get Status from any rules.
 ### In Summary
-This driver gives you the flexibility to trigger your cameras with more reliable and consistent PIR sensors, or any other sensor. For example, when you're away and your house is armed, you can trigger all of your cameras if any one of your security sensors goes off. If you want to capture events that are not security related and create convenient playback markers in a continuous recording stream, you can do that, too.
+This driver gives you the flexibility to trigger your cameras with more reliable and consistent PIR sensors, or any other sensor. For example, when you're away and your house is armed, you can trigger all of your cameras if any one of your security sensors goes off.
 
 You are now in complete control of when Alarms can be triggerd on your cameras and when Motion Detection features are enabled. Once you're up and running and have validated its operation, this driver will run quietly in the background, so you can rest assured it will perform the actions you need it to when called upon.
  
