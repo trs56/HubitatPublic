@@ -97,7 +97,7 @@ Debug logging is used for dumping the converted XML data that is returned by the
 ## Security Warning
 This driver uses HTTP Basic Authentication to login to your camera. Your encoded credentials are saved and displayed in the Data section of the device in the format required for this method of authentication.
 ## Feedback and Contact for Support
-Please contact me through the Hubitat Community, TomS or trs56 on github. Please be aware that I may not be able to get back to you instantly. I do look forward to hearing your feedback.  
+Please message me through the Hubitat Community Forum, not on github. Please be aware that I may not be able to get back to you instantly. I do look forward to hearing your feedback.  
 Thanks for checking this out.
 ## Disclaimers
 USE AT YOUR OWN RISK
