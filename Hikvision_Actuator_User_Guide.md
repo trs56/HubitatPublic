@@ -42,7 +42,7 @@ Check Linkage Methods for all Basic and Smart Events to make sure this option is
 5: Enable Alarm Input Handling in Basic Events > Alarm Input   
 Set Alarm Type to NO (is default, normally open, no voltage)   
 Set the Alarm Name (e.g. CamName Alarm)   
-Set the Arming Schedule to 24x7 for now. You decide later.   
+Set the Arming Schedule to 24x7 for now.    
 Set desired Linkage Methods (email, notify, record)
 
 6: In Basic Events > Alarm Output, set Delay to 5 seconds (default)
