@@ -34,13 +34,17 @@ You can use your admin account, but it is recommended that you create an Operato
 4: Basic and Smart Events must not be configured to trigger Alarm Out.   
 Check Linkage Methods for all Basic and Smart Events to make sure this option is not selected. HE is now in control.   
  
-5: Enable Alarm Input Handling in Basic Events - Alarm Input   
+5: Enable Alarm Input Handling in Basic Events > Alarm Input   
 Set Alarm Type to NO (is default, normally open, no voltage)   
 Set the Alarm Name (e.g. CamName Alarm)   
 Set the Arming Schedule to 24x7 for now. You decide later.   
-Set desired Linkage Methods (email, notify, record)   
+Set desired Linkage Methods (email, notify, record)
+
+6: In Basic Events > Alarm Output, set Delay to 5 seconds (default)
+
+7: In Storage > Schedule Settings: Click Advanced button and set appropriate Pre-Record time to accomodate for the delay and other factors unique to your environment, including the sensors and rules you will be using to trigger alarms and recording.
     
-6: Connect the Alarm In/Out ports with a small jumper wire.   
+8: Connect the Alarm In/Out ports with a small jumper wire.   
 
 You are now ready to configure your camera for operation with HE using the Hikvision Actuator.
  
@@ -59,9 +63,13 @@ You may now start running commands and create test rules to validate its operati
 
 Start with turning your motion sensors on/off and watch the change in state. Confirm the change in state on your camera.
 
-Turn the Alarm On to confirm you receive the notifications you have configured for the Alarm Input Event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
+Enable the Alarm Input Event and turn the Alarm On to confirm you receive the notifications you have configured for the Alarm Input Event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
+
+Note that there is a 5 second delay before the ouput port is actually triggered, as configured. You must accomodate for this delay when setting your pre-record buffer in Storage Management.
 
 DO NOT forget to turn the Alarm OFF in your rules when conditions go back to normal. So if you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off.
+
+
 
 Get Status will get the current state of all features from the camera and update the status attributes on the device, if needed. This command is in place for testing and development purposes and may be removed when the driver comes out of beta for general release. Do not call Get Status from any rules.
 ### In Summary
