@@ -68,11 +68,11 @@ You may now start running commands and create test rules to validate its operati
 
 Start with turning your motion sensors on/off and watch the change in state. Confirm the change in state on your camera.
 
-Enable the Alarm Input Event and turn the Alarm On to confirm you receive the notifications you have configured for the event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is, considering the Delay you have configured for the Alarm Out Event. This and other factors related to how you are triggering alarms must also be considered when setting your Pre-Record Buffer in Storage Management (Advanced button). You may want to set a larger buffer of 20-30 seconds.
+Enable the Alarm Input Event and turn the Alarm On to confirm you receive the notifications you have configured for the event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is, considering the Delay you have configured for the Alarm Out Event.
 
 Do not forget to turn the Alarm OFF in your rules when conditions go back to normal. So if you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off.
 
-Get Status will get the current state of all features from the camera and update the status attributes on the device, if needed. This command is in place for testing and development purposes and may be removed when the driver comes out of beta for general release. Do not call Get Status from any rules.
+Get Status will get the current state of all features from the camera and update the status attributes on the device, if needed. This command is in place for testing and development purposes and may be removed when the driver comes out of beta for general release in the Hubitat Community. Do not call Get Status from any rules.
 ### In Summary
 This driver gives you the flexibility to trigger your cameras with more reliable and consistent PIR sensors, or any other sensor. For example, when you're away and your house is armed, you can trigger all of your cameras if any one of your security sensors goes off.
 
