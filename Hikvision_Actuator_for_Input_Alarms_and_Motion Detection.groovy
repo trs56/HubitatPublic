@@ -17,6 +17,8 @@
 // Date        Version        Release Notes
 // 12-28-2023  BETA 0.1       Original Public Beta Release
 // 12-30-2023                 Added Firmware version to device Data and renamed two Data vars
+// 12-30-2023                 Change Welcome to Hello in installed method
+// 01-01-2024  BETA 0.2       Added Commands to Enable/Disable Alarm Input Handling
 //******************************************************************************
 metadata {
     definition (name: "Hikvision Actuator for Input Alarms and Motion Detection", 
@@ -27,16 +29,20 @@ metadata {
         // that can be run from rules or apss. This capability has no required
         // commands or attributes of its own. Its all custom.
         capability "Actuator"
-    
+
+    	command "EnableAlarmIn"
+	    command "DisableAlarmIn"    
         command "AlarmOff"
         command "AlarmOn"
         command "GetStatus"
-        command "MotionOff"
-        command "MotionOn"
-        command "PIRSensorOff"
-        command "PIRSensorOn"
+        command "DisableMotion"
+        command "EnableMotion"
+        command "DisablePIR"
+        command "EnablePIR"
         
-        attribute "AlarmOut", "STRING"   // Powered state of wired Alarm Output Port (active/inactive)
+        attribute "AlarmIn", "STRING"    // Enabled/Disabled state of Alarm Input Event (Handling)
+        attribute "AlarmInSt", "STRING"  // Powered state of wired Alarm Input Port (active/inactive)
+        attribute "AlarmOut", "STRING"   //           "                  Output  "
         attribute "Intrusion", "STRING"  // Enabled/Disabled state of Intrusion Event
         attribute "LineCross", "STRING"  // ""
         attribute "Motion", "STRING"     // ""
@@ -88,7 +94,7 @@ void installed() {
     def lr = l.reverse()
     lr.each {log.info it}
     sendEvent(name:"zStatus",
-              value:"Welcome! If you are adding your first camera, PLEASE OPEN THE LOG NOW, If not, please proceed.")
+              value:"Hello! If you are adding your first camera, PLEASE OPEN THE LOG NOW, If not, please proceed.")
 }
 //******************************************************************************
 // Preferences Saved
@@ -140,37 +146,49 @@ void updated() {
     log.info "Device update completed"
 }
 //******************************************************************************
+void EnableAlarmIn() {
+    log.info "Received request to Enable Alarm Input Handling"
+    if (!Ok2Run("AlarmIn")) {return}
+    SetAlarmIn("true")
+}
+//******************************************************************************
+void DisableAlarmIn() {
+    log.info "Received request to Disable Alarm Input Handling"
+    if (!Ok2Run("AlarmIn")) {return}
+    SetAlarmIn("false")
+}
+//******************************************************************************
 void AlarmOn() {
-    log.info "Received request to set Alarm On"
+    log.info "Received request to Trigger Alarm Out"
     if (!Ok2Run("AlarmOut")) {return}  // its the feature being passed, not the command
     SetAlarm("active")
 }
 //******************************************************************************
 void AlarmOff() {
-    log.info "Received request to set Alarm Off"
+    log.info "Received request to reset Alarm Out"
     if (!Ok2Run("AlarmOut")) {return}
     SetAlarm("inactive")
 }
 //******************************************************************************
-void MotionOn() {
+void EnableMotion() {
     log.info "Received request to enable Motion"
     if (!Ok2Run("Motion")) {return}
     SetMotion("true")
 }
 //******************************************************************************
-void MotionOff() {
+void DisableMotion() {
     log.info "Received request to disable Motion"
     if (!Ok2Run("Motion")) {return}
     SetMotion("false")
 }
 //******************************************************************************
-void PIRSensorOn() {
+void EnablePIR() {
     log.info "Received request to enable PIR Sensor"
     if (!Ok2Run("PIRSensor")) {return}
     SetPIR("true")
 }
 //******************************************************************************
-void PIRSensorOff() {
+void DisablePIR() {
     log.info "Received request to disable PIR Sensor"
     if (!Ok2Run("PIRSensor")) {return}
     SetPIR("false")
@@ -217,6 +235,13 @@ def GetStatus() {
     if (camstate == "ERR" || camstate == "CRED") {
         strMsg = camstate
         if (SavingPreferences) {return} // let that method update zStatus
+        sendEvent(name:"zStatus",value:camstate)
+        return} 
+    camstate = GetFeatureState("/ISAPI/System/IO/inputs/1","AlarmIn")
+    if (camstate == "NA") {na = true} 
+    if (camstate == "ERR" || camstate == "CRED") {
+        strMsg = camstate
+        if (SavingPreferences) {return}
         sendEvent(name:"zStatus",value:camstate)
         return} 
     camstate = GetFeatureState("/IO/status","AlarmOut")
@@ -278,13 +303,14 @@ private GetFeatureState(String Path, String Feature) {
     //  This applies to all calls to the SendGet and SendPut Request methods.
     if (strMsg == "OK") {
         if (Feature == "AlarmOut") {
-//            camstate = xml.IOPortStatus[0].ioState.text()
-//            if (camstate != device.currentValue("AlarmIn")) {sendEvent(name:"AlarmIn", value:camstate)}
-//            log.info "Alarm In: " + camstate 
+            camstate = xml.IOPortStatus[0].ioState.text()
+            if (camstate != device.currentValue("AlarmInSt")) {sendEvent(name:"AlarmInSt", value:camstate)}
+            log.info "Alarm In: " + camstate 
             camstate = xml.IOPortStatus[1].ioState.text()
             if (camstate != devstate) {sendEvent(name:Feature, value:camstate)}
             log.info Feature + ": " + camstate
         } else {
+            // All other Features report their Enabled/Disabled state as true/false
             camstate = xml.enabled.text()
             if (camstate == "true") {camstate = "enabled"} else {camstate = "disabled"}
             if (camstate != devstate) {sendEvent(name:Feature, value:camstate)}
@@ -323,7 +349,7 @@ private LogGETError() {
 //******************************************************************************
 // Get Camera Info
 //******************************************************************************
-def GetSysInfo(String Path) {
+private GetSysInfo(String Path) {
     log.info "GET " + Path
 
     def xml = SendGetRequest(Path)
@@ -358,10 +384,60 @@ def GetSysInfo(String Path) {
     }
 }
 //******************************************************************************
-// Set Alarm
+// Enable/Disable Alarm Input Handling
+//******************************************************************************
+private SetAlarmIn(String newstate) {
+    def devstate = device.currentValue("AlarmIn")
+    log.info "GET /ISAPI/System/IO/inputs/1"
+    def xml = SendGetRequest("/ISAPI/System/IO/inputs/1")
+    if (strMsg != "OK") {
+        def errcd = LogGETError()
+        sendEvent(name:"zStatus:", value:errcd)
+        return
+    }
+    def camstate = xml.enabled.text()
+    def cname = xml.name.text() // carry over current alarm name
+
+    if (debug) {log.debug "Extracted: xml.enabled.text(): " + camstate}
+    if (debug) {log.debug "Extracted: xml.name.text(): " + cname}
+    
+    if (camstate == newstate) {
+        if (newstate == "true") {newstate = "enabled"} else {newstate = "disabled"}
+        log.info "OK, Alarm Input Handling is already " + newstate
+        if (devstate != newstate) {sendEvent(name:"AlarmIn", value:newstate)}
+        sendEvent(name:"zStatus",value:"OK")
+        return
+    }
+    
+    strXML= "<IOInputPort><id>1</id>" +\
+            "<enabled>" + newstate + "</enabled><triggering>high</triggering><name>" + cname + "</name></IOInputPort>"
+
+    
+    log.info "PUT /ISAPI/System/IO/inputs/1/enabled=" + newstate
+
+    xml = SendPutRequest("/ISAPI/System/IO/inputs/1", strXML)
+
+    if (strMsg == "OK") {
+        if (newstate == "true") {newstate = "enabled"} else {newstate = "disabled"}
+        log.info "OK, Alarm Input Handling is now " + newstate
+        sendEvent(name:"AlarmIn", value:newstate)
+        sendEvent(name:"zStatus",value:"OK")
+    } else {
+        log.error "PUT Error: " + strMsg
+        if (strMsg.contains("code: 403") && strMsg.contains("Forbidden")) {
+            etype = "NA"
+            log.error "Operator does not have Remote Notify option selected in user account settings."
+        }
+        sendEvent(name:"zStatus",value:"ERR")
+    }
+}
+//******************************************************************************
+// Trigger Alarm Out On/Off (high/low)
 //******************************************************************************
 private SetAlarm(String newstate) {
     String devstate = device.currentValue("AlarmOut")
+    String camstate = " "
+    String alistate = " " // alarm input state
     log.info "GET /IO/status"
 
     def xml = SendGetRequest("/IO/status")
@@ -413,7 +489,7 @@ private SetAlarm(String newstate) {
     }
 }
 //******************************************************************************
-// Set Motion Detection
+// Enable/Disable Motion Detection
 //******************************************************************************
 private SetMotion(String newstate) {
     String devstate = device.currentValue("Motion")
@@ -492,7 +568,7 @@ private SetMotion(String newstate) {
    
 }
 //******************************************************************************
-// Set PIR
+// Enable/Disable PIR Sensor
 //******************************************************************************
 private SetPIR(String newstate) {
     def devstate = device.currentValue("PIRSensor")
