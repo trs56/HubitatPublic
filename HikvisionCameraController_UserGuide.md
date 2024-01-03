@@ -1,5 +1,5 @@
 # Hikvision Camera Controller - User Guide - R1.0
-### Copyright: 2023 Thomas R Schmidt, Wildwood IL
+### Copyright: 2024 Thomas R Schmidt, Wildwood IL
 Unauthorized copy or publication is prohibited.
 ## Prerequisites
 Your cameras must be on a switch that is connected to your router and configured with a static ip address. The driver is unable to control or trigger cameras that are directly connected to a Hikvision NVR. This functionality is planned for a future release.
