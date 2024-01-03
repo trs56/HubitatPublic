@@ -1,7 +1,7 @@
 //******************************************************************************
 //* Hikvision Camera Controller - Device Driver for Hubitat Elevation
 //******************************************************************************
-//*  Copyright 2023 Thomas R Schmidt, Wildwood IL
+//*  Copyright 2024 Thomas R Schmidt, Wildwood IL
 //*  This program is free software: you can redistribute it and/or modify
 //*  it under the terms of the GNU General Public License as published by
 //*  the Free Software Foundation.
