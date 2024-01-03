@@ -84,7 +84,7 @@ The status attributes change when a command is run that triggers it. The driver 
 
 During normal operation, zStatus should remain OK at all times. All commands ping the ip first to see if it is online. If the ping fails, zStatus will go to OFF and remain OFF until a command is run that sees it back online.
  
-Note: Due to the Alarm Out trigger delay, Alarm In state will not change to active/inactive immediately on screen when the Alarm is triggered or cleared. The only command that updates Alarm In state is Get Status, and when Saving Preferences.
+Note: The Alarm In State of the wired port will not change to active/inactive on screen when Alarm Out is triggered or cleared. The only command that updates Alarm In state is Get Status, and when Saving Preferences. Use Get Status while testing to confirm the requested state change.
 
 If you change the credentials of the hubitat account on the camera and forget to change them here, the next time a command is run, zStatus will be set to CRED and operation suspended until you Save Preferences to fix the mis-match.
  
