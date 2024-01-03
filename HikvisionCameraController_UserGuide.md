@@ -1,5 +1,6 @@
-# Hikvision Camera Controller R1.0 - User Guide
-### Copyright: 2024 Thomas R Schmidt, Wildwood IL
+# Hikvision Camera Controller for Hubitat Elevation R1.0
+# User Guide
+**Copyright:** 2024 Thomas R Schmidt, Wildwood IL   
 Unauthorized copy or publication is prohibited.
 ## Prerequisites
 Your cameras must be on a switch that is connected to your router and configured with a static ip address. The driver is unable to control or trigger cameras that are directly connected to a Hikvision NVR. This functionality is planned for a future release.
