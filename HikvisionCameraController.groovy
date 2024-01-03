@@ -36,7 +36,7 @@ metadata {
 
         command "AlarmOff"
         command "AlarmOn"
-	    command "DisableAlarmIn"
+	command "DisableAlarmIn"
         command "DisableIntrusion"
         command "DisableLineCross"
         command "DisableMotion"
