@@ -1,4 +1,4 @@
-# Hikvision Camera Controller - User Guide - R1.0
+# Hikvision Camera Controller R1.0 - User Guide
 ### Copyright: 2024 Thomas R Schmidt, Wildwood IL
 Unauthorized copy or publication is prohibited.
 ## Prerequisites
