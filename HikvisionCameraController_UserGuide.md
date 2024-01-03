@@ -12,9 +12,11 @@ If you can't use the Trigger feature, you can still use the driver to control th
 The driver also requires specific camera settings, which are described below.
 ## Introduction
 The driver implements the Actuator capability and allows you perform the following functions by calling the drivers custom commands from your rules and apps.
-* Trigger Alarm Input Events using HE sensors and/or rules
+* Trigger Alarm Input Events using HE Sensor Devices and Rules
 * Enable/Disable Alarm Input Handling
-* Enable/Disable Motion Detection features, including PIR Sensors (if equipped)
+* Enable/Disable Motion Detection Features
+* Maintain Arming Schedules in HE based on mode
+* Does not integrate with HSM at this time
 
 ![Control Panel](HikvisionDriver.png)
 
