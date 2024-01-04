@@ -3,7 +3,7 @@
     "author": "Tom Schmidt",
     "version": "1.0.0",
     "dateReleased": "2024-01-01",
-    "releaseNotes": "First Release: Enable/Disable Motion Detection Features and Trigger Input Alarm Events (if equipped)",
+    "releaseNotes": "First Release: Enable/Disable Motion Detection Features and Trigger Alarm Input Events (if equipped)",
     "documentationLink": "https://github.com/trs56/HubitatPublic/blob/main/HikvisionCameraController_UserGuide.md",
     "drivers": [
         {
