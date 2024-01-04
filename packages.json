@@ -1,6 +1,5 @@
 {
     "packageName": "Hikvision Camera Controller",
-    "minimumHEVersion": "2.2.1",
     "author": "Tom Schmidt",
     "version": "1.0.0",
     "dateReleased": "2024-01-01",
@@ -8,7 +7,7 @@
     "documentationLink": "https://github.com/trs56/HubitatPublic/blob/main/HikvisionCameraController_UserGuide.md",
     "drivers": [
         {
-            "id": "2e6b1674-a87b-41a8-bd65-5cbbf78d842e",
+            "id": "9facf585-e661-4ee5-8ea0-ac48639236c2",
             "name": "Hikvision Camera Controller",
             "location": "https://raw.githubusercontent.com/trs56/HubitatPublic/main/HikvisionCameraController.groovy",
             "required": true
