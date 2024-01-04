@@ -1,0 +1,20 @@
+{
+    "author": "Tom Schmidt",
+    "gitHubUrl": "https://github.com/trs56",
+    "packages": [
+        {
+            "name": "Hikvision Camera Controller",
+            "category": [
+                "Integrations",
+                "Security"
+            ],
+            "tags": [
+                "Alarm Systems",
+                "Motion Control",
+                "Security"
+            ],
+            "location": "https://raw.githubusercontent.com/trs56/HubitatPublic/main/camcontrol.json",
+            "description": "Hikvision Camera Controller"
+        }
+    ]
+}
