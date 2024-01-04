@@ -13,7 +13,7 @@
                 "Motion Control",
                 "Security"
             ],
-            "location": "https://raw.githubusercontent.com/trs56/HubitatPublic/main/pkgCamControl.json",
+            "location": "https://raw.githubusercontent.com/trs56/HubitatPublic/main/packages.json",
             "description": "Hikvision Camera Controller"
         }
     ]
