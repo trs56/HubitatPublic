@@ -1,7 +1,7 @@
 //******************************************************************************
 //* Hikvision Camera Controller - Device Driver for Hubitat Elevation
 //******************************************************************************
-//*  Copyright 2024 Thomas R Schmidt, Wildwood IL
+//*  Copyright 2023 Thomas R Schmidt, Wildwood IL
 //*  This program is free software: you can redistribute it and/or modify
 //*  it under the terms of the GNU General Public License as published by
 //*  the Free Software Foundation.
@@ -36,7 +36,7 @@ metadata {
 
         command "AlarmOff"
         command "AlarmOn"
-	command "DisableAlarmIn"
+	    command "DisableAlarmIn"
         command "DisableIntrusion"
         command "DisableLineCross"
         command "DisableMotion"
@@ -196,73 +196,63 @@ void AlarmOff() {
 }
 //******************************************************************************
 void EnableAlarmIn() {
-    String AlarmInPath = "/ISAPI/System/IO/inputs/1"
     log.info "Received request to Enable Alarm Input Handling"
     if (!Ok2Run("AlarmIn")) {return}
-    SetFeatureState("AlarmIn","true", AlarmInPath)
+    SetFeatureState("AlarmIn","true", "/ISAPI/System/IO/inputs/1")
 }
 //******************************************************************************
 void DisableAlarmIn() {
-    String Path = "/ISAPI/System/IO/inputs/1"
     log.info "Received request to Disable Alarm Input Handling"
     if (!Ok2Run("AlarmIn")) {return}
-    SetFeatureState("AlarmIn","false",Path)
+    SetFeatureState("AlarmIn","false","/ISAPI/System/IO/inputs/1")
 }
 //******************************************************************************
 void EnableIntrusion() {
-    String Path = "/ISAPI/Smart/FieldDetection/1"
     log.info "Received request to Enable Intrusion"
     if (!Ok2Run("Intrusion")) {return}
-    SetFeatureState("Intrusion","true",Path)
+    SetFeatureState("Intrusion","true","/ISAPI/Smart/FieldDetection/1")
 }
 //******************************************************************************
 void DisableIntrusion() {
-    String Path = "/ISAPI/Smart/FieldDetection/1"
     log.info "Received request to Disable Intrusion"
     if (!Ok2Run("Intrusion")) {return}
-    SetFeatureState("Intrusion","false",Path)
+    SetFeatureState("Intrusion","false","/ISAPI/Smart/FieldDetection/1")
 }
 //******************************************************************************
 void EnableLineCross() {
-    String Path = "/ISAPI/Smart/LineDetection/1"
     log.info "Received request to Enable LineCross"
     if (!Ok2Run("LineCross")) {return}
-    SetFeatureState("LineCross","true",Path)
+    SetFeatureState("LineCross","true","/ISAPI/Smart/LineDetection/1")
 }
 //******************************************************************************
 void DisableLineCross() {
-    String Path = "/ISAPI/Smart/LineDetection/1"
     log.info "Received request to Disable LineCross"
     if (!Ok2Run("LineCross")) {return}
-    SetFeatureState("LineCross","false",Path)
+    SetFeatureState("LineCross","false","/ISAPI/Smart/LineDetection/1")
 }
 //******************************************************************************
 void EnableMotion() {
-    String Path = "/MotionDetection/1"
     log.info "Received request to Enable Motion"
     if (!Ok2Run("MotionD")) {return}
-    SetFeatureState("MotionD","true",Path)
+    SetFeatureState("MotionD","true","/MotionDetection/1")
 }
 //******************************************************************************
 void DisableMotion() {
-    String Path = "/MotionDetection/1"
     log.info "Received request to Disable Motion"
     if (!Ok2Run("MotionD")) {return}
-    SetFeatureState("MotionD","false",Path)
+    SetFeatureState("MotionD","false","/MotionDetection/1")
 }
 //******************************************************************************
 void EnablePIR() {
-    String Path = "/ISAPI/WLAlarm/PIR"
     log.info "Received request to Enable PIR Sensor"
     if (!Ok2Run("PIRSensor")) {return}
-    SetFeatureState("PIRSensor","true",Path)
+    SetFeatureState("PIRSensor","true","/ISAPI/WLAlarm/PIR")
 }
 //******************************************************************************
 void DisablePIR() {
-    String Path = "/ISAPI/WLAlarm/PIR"
     log.info "Received request to Disable PIR Sensor"
     if (!Ok2Run("PIRSensor")) {return}
-    SetFeatureState("PIRSensor","false",Path)
+    SetFeatureState("PIRSensor","false","/ISAPI/WLAlarm/PIR")
 }
 //******************************************************************************
 // Get Current State of all Features and Update Attributes
@@ -270,12 +260,6 @@ void DisablePIR() {
 def GetStatus() {
     Boolean err = false
     Boolean na = false
-    String AlarmInPath = "/ISAPI/System/IO/inputs/1"
-    String AlarmOutPath = "/IO/status"
-    String IntrusionPath = "/ISAPI/Smart/FieldDetection/1"
-    String LineCrossPath = "/ISAPI/Smart/LineDetection/1"
-    String MotionDPath = "/MotionDetection/1"
-    String PIRSensorPath = "/ISAPI/WLAlarm/PIR"
     String camstate = " "
     log.info "Request received to Get Status and update attributes"
     if (!SavingPreferences && !Ok2Run("GetStatus")) {return}
@@ -286,42 +270,42 @@ def GetStatus() {
         if (SavingPreferences) {return}
         sendEvent(name:"zStatus",value:camstate)
         return} 
-    camstate = GetFeatureState("AlarmIn",AlarmInPath)
+    camstate = GetFeatureState("AlarmIn","/ISAPI/System/IO/inputs/1")
     if (camstate == "NA") {na = true} 
     if (camstate == "ERR" || camstate == "CRED") {
         strMsg = camstate
         if (SavingPreferences) {return}
         sendEvent(name:"zStatus",value:camstate)
         return} 
-    camstate = GetFeatureState("AlarmOut",AlarmOutPath)
+    camstate = GetFeatureState("AlarmOut","/IO/status")
     if (camstate == "NA") {na = true} 
     if (camstate == "ERR" || camstate == "CRED") {
         strMsg = camstate
         if (SavingPreferences) {return}
         sendEvent(name:"zStatus",value:camstate)
         return} 
-    camstate = GetFeatureState("MotionD",MotionDPath)
+    camstate = GetFeatureState("MotionD","/MotionDetection/1")
     if (camstate == "NA") {na = true} 
     if (camstate == "ERR" || camstate == "CRED") {
         strMsg = camstate
         if (SavingPreferences) {return}
         sendEvent(name:"zStatus",value:camstate)
         return} 
-    camstate = GetFeatureState("PIRSensor",PIRSensorPath)
+    camstate = GetFeatureState("PIRSensor","/ISAPI/WLAlarm/PIR")
     if (camstate == "NA") {na = true} 
     if (camstate == "ERR" || camstate == "CRED") {
         strMsg = camstate
         if (SavingPreferences) {return}
         sendEvent(name:"zStatus",value:camstate)
         return} 
-    camstate = GetFeatureState("Intrusion",IntrusionPath)
+    camstate = GetFeatureState("Intrusion","/ISAPI/Smart/FieldDetection/1")
     if (camstate == "NA") {na = true} 
     if (camstate == "ERR" || camstate == "CRED") {
         strMsg = camstate
         if (SavingPreferences) {return}
         sendEvent(name:"zStatus",value:camstate)
         return} 
-    camstate = GetFeatureState("LineCross",LineCrossPath)
+    camstate = GetFeatureState("LineCross","/ISAPI/Smart/LineDetection/1")
     if (camstate == "NA") {na = true} 
     if (camstate == "ERR" || camstate == "CRED") {
         strMsg = camstate
