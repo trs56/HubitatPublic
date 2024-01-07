@@ -55,11 +55,16 @@ You are now ready to configure your camera for operation with HE using the Hikvi
 2. Enter IP Address, Port, Credentials and Camera Name (as defined on the Camera).
 3. Click Save.
 
-For cameras connected to the NVR POE subnet, use the ip address of the NVR and the Port assigned by the Virtual Host feature. For all other cameras, use the camera ip address and port. Do NOT got through the NVR to access a local network camera you have added to the NVR for recording and control purposes.
+For cameras connected to the NVR POE subnet, use the ip address of the NVR and the Port assigned by the Virtual Host feature. For all other cameras, use the camera ip address and port. Do NOT use the NVR to access a local network camera you have added to the NVR for recording and control purposes.
 
- Whenever you Save Preferences, the driver will validate your camera by first pinging the ip address and then sending a GET request for the data from /System/deviceInfo using the Credentials you entered. If these checks fail, an error message will be displayed in the zStatus attribute and you will need fix it and try again. If you can't get past this step, you may need to call the help desk to report that you have a Hikvision camera that is not being recognized.
+Whenever you Save Preferences, the driver will validate your camera by performing these tests:
+1. Ping the ip address to see if it is online.
+2. If online, send a HTTP GET request to get the data from **ipaddress:port/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials.)
+3. Compare the camera name on the camera with the name you entered.
+
+When these checks fail, zStatus will display an error message. Fix the problem and retry. If you can't get past this step, please call the help desk to report that you have a Hikvision camera that is not being recognized (see below).
  
-If all is well, it will say Yay!. Your camera has been validated and is ready for operation.
+When all is well, zStatus will say Yay! Your camera has been validated and is ready for operation.
  
 If a motion detection feature is not available on your camera, its status will be set to NA and the on/off commands for that feature will be disabled.
  
