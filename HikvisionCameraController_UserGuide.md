@@ -3,27 +3,25 @@
 **Copyright:** 2024 Thomas R Schmidt, Wildwood IL   
 Unauthorized copy or publication is prohibited.
 ## Prerequisites
-Your cameras must be on a switch that is connected to your router and configured with a static ip address. The driver is unable to control or trigger cameras that are directly connected to a Hikvision NVR. This functionality is planned for a future release.
-
 To use the key feature of this driver, which is to trigger Alarm Input Events on your camera using sensors and rules in HE, your camera must have wired Alarm I/O ports that are accessible and not in use. Because for this to work, you will need to connect the In/Out ports with a jumper wire. This will not damage your camera. It is required since the driver is only allowed to trigger Alarm Out when using the Hikvision API. The API does not not allow apps to trigger Alarm In. 
 
-When Alarm Out is triggered, the camera switches a dry contact relay on the ouput port from open to closed. This exposes a closed circuit over the jumper wire to the Alarm In port and its relay, which is all it is waiting for in its NO state. When it senses a closed circuit, the relay closes and the event fires. When the Alarm is cleared, the output relay opens and so does the circuit to Alarm In, opening its relay. There is no voltage applied. Voltage is only present when there is a powered sensor (input), siren (output) or security system control panel connected. The reason you don't need to connect the Grounding ports is because both relays share the same path to ground in the camera.
-
-You can and should test this yourself first by connecting the ports, enabling your Alarm Input Event and triggering a manual alarm from the Alarm Out event on your camera (don't forget to clear it).
+When Alarm Out is triggered, the camera switches a dry contact relay on the ouput port from open to closed, nothing else. This exposes a closed circuit over the jumper wire to the Alarm In port and its relay, which is all it is waiting for in its NO state. When it senses a closed circuit, the Alarm In relay closes and the event fires. When the Alarm is cleared, the output relay opens and so does the circuit to Alarm In, which then goes back to its NO state. There is no voltage applied. Voltage is only present when there is a powered sensor (input), powered siren (output) or powered security system control panel connected. The reason you don't need to connect the grounding ports is because both relays share the same path to ground in the camera. Please see Disclaimers below for additional information.
 
 ![Jumper Wire](JumperWire.png)
+
+You can and should first read the Disclaimers below and then test this yourself by connecting the ports, enabling your Alarm Input Event and triggering a manual alarm from the Alarm Out event on your camera (don't forget to clear it).
 
 If you can't use the Trigger feature, you can still use the driver to control the arming schedules for all motion detection features, allowing you to arm your cameras based on your mode in HE.
 The driver also requires specific camera settings, which are described below.
 ## Introduction
-The driver implements the Actuator capability and allows you perform the following functions by calling the drivers custom commands from your rules and apps.
-* Trigger Alarm Input Events using HE Sensor Devices and Rules
+This driver implements the Actuator and Switch capabilities, which allows you perform the following functions by calling the drivers custom commands from your rules and apps. Featires include:
+* Trigger Alarm Input Events using HE Sensors and Rules
 * Enable/Disable Alarm Input Handling
 * Enable/Disable Motion Detection Features
-* Maintain Arming Schedules in HE based on mode
-* Does not integrate with HSM at this time
+* Enable/Disable all Motion Detections at once with the On/Off commands, filtering those features you don't use or wish to leave alone, and simplifying the rules needed to arm and disarm your cameras. This also allows integration with HSM.
 
-![Control Panel](HikvisionDriver.png)   
+![Control Panel](HikvisionDriver
+
 This allows you to trigger alarms on your cameras whenever conditions warrant and use HE to control the arming schedule for the Alarm Input Event and all supported Motion Detection Events in HE, based on changes in mode (home, away, day, night). You can do this by setting the arming schedules on the camera to 24x7 and then running the driver commands to enable/disable motion detection features when the change in mode occurs.
 
 ### Additional Features Coming Soon in R1.1
