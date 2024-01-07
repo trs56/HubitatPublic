@@ -7,8 +7,6 @@ To use the key feature of this driver, which is to trigger Alarm Input Events on
 
 When Alarm Out is triggered, the camera switches a dry contact relay on the ouput port from open to closed, nothing else. This exposes a closed circuit over the jumper wire to the Alarm In port and its relay, which is all it is waiting for in its NO state. When it senses a closed circuit, the Alarm In relay closes and the event fires. When the Alarm is cleared, the output relay opens and so does the circuit to Alarm In, which then goes back to its NO state. There is no voltage applied. Voltage is only present when there is a powered sensor (input), powered siren (output) or powered security system control panel connected. The reason you don't need to connect the grounding ports is because both relays share the same path to ground in the camera. Please see Disclaimers below for additional information.
 
-![Jumper Wire](JumperWire.png)
-
 You can and should first read the Disclaimers below and then test this yourself by connecting the ports, enabling your Alarm Input Event and triggering a manual alarm from the Alarm Out event on your camera (don't forget to clear it).
 
 If you can't use the Trigger feature, you can still use the driver to control the arming schedules for all motion detection features, allowing you to arm your cameras based on your mode in HE.
@@ -32,20 +30,19 @@ Since I am a new developer on HE, I will be releasing additional features within
 To use the driver, your camera must be configured as follows:
 Please note that the path to the setting on your camera may be different.
  
-1: System > Security > Web Authentication = digest/basic
+1: System > Security > **Web Authentication = digest/basic**
  
-2: Network > Advanced > Integration Protocol >
-   Hikvision-CGI Enabled, Authentication=digest/basic
+2: Network > Advanced > Integration Protocol > **Hikvision-CGI Enabled, Authentication=digest/basic**
  
-3: Optional Operator account with the Remote Parameters/Settings and Remote Notify options selected.   
-You can use your admin account, but it is recommended that you create an Operator account for Hubitat.
+3: Optional **Operator** user account with the **Remote Parameters/Settings and Remote Notify** options selected.   
+You can use your admin account, but it is **strongly recommended** that you create an Operator account for Hubitat. Do not take changes with your Hikvision admin accounts.
  
-4: Basic and Smart Events must not be configured to trigger Alarm Out.   
+4: **Basic and Smart Events must not be configured to trigger Alarm Out**   
 Check Linkage Methods for all Basic and Smart Events to make sure this option is not selected. HE is now in control.   
  
-5: Enable Alarm Input Handling in Basic Events > Alarm Input   
-Set Alarm Type to NO (is default, normally open, no voltage)   
-Set the Alarm Name (e.g. CamName Alarm)   
+5: **Enable Alarm Input Handling in Basic Events > Alarm Input**   
+Set Alarm Type to NO (is default, normally open)   
+Set the Alarm Name (e.g. CamName Alarm, used in notifications)   
 Set the Arming Schedule to 24x7    
 Set desired Linkage Methods (email, notify, record)
 
@@ -58,11 +55,13 @@ Set desired Linkage Methods (email, notify, record)
 You are now ready to configure your camera for operation with HE using the Hikvision Camera Controller.
  
 ## Device Configuration and Operation
-1: Add a new Virtual Device using the Hikvision Camera Controller
+1. Add a new Virtual Device using the Hikvision Camera Controller
+2. Enter IP Address, Port, Credentials and Camera Name (as defined on the Camera).
+3. Click Save.
 
-2: Enter your camera ip address, port and credentials in userid:password format. Click Save.
- 
-Whenever you Save Preferences, the driver will validate your camera by first pinging the ip address and then sending a GET request for the data from /System/deviceInfo using the Credentials you entered. If these checks fail, an error message will be displayed in the zStatus attribute and you will need fix it and try again. If you can't get past this step, you may need to call the help desk to report that you have a Hikvision camera that is not being recognized.
+For cameras connected to the NVR POE subnet, use the ip address of the NVR and the Port assigned by the Virtual Host feature. For all other cameras, use the camera ip address and port. Do NOT got through the NVR to access a local network camera you have added to the NVR for recording and control purposes.
+
+ Whenever you Save Preferences, the driver will validate your camera by first pinging the ip address and then sending a GET request for the data from /System/deviceInfo using the Credentials you entered. If these checks fail, an error message will be displayed in the zStatus attribute and you will need fix it and try again. If you can't get past this step, you may need to call the help desk to report that you have a Hikvision camera that is not being recognized.
  
 If all is well, it will say Yay!. Your camera has been validated and is ready for operation.
  
