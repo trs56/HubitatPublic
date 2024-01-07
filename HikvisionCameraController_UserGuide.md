@@ -31,7 +31,7 @@ Please note that the path to the setting on your camera may be different.
 2: Network > Advanced > Integration Protocol > **Hikvision-CGI Enabled, Authentication=digest/basic**
  
 3: Optional **Operator** user account with the **Remote Parameters/Settings and Remote Notify** options selected.   
-You can use your admin account, but it is **strongly recommended** that you create an Operator account for Hubitat. Do not take changes with your Hikvision admin accounts.
+You can use your admin account, but it is **strongly recommended** that you create an Operator account for Hubitat. Do not take chances with your Hikvision admin accounts.
  
 4: **Basic and Smart Events must not be configured to trigger Alarm Out**   
 Check Linkage Methods for all Basic and Smart Events to make sure this option is not selected. HE is now in control.   
