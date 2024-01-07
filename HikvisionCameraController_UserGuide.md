@@ -7,6 +7,8 @@ To use the key feature of this driver, which is to trigger Alarm Input Events on
 
 When Alarm Out is triggered, the camera switches a dry contact relay on the ouput port from open to closed, nothing else. This exposes a closed circuit over the jumper wire to the Alarm In port and its relay, which is all it is waiting for in its NO state. When it senses a closed circuit, the Alarm In relay closes and the event fires. When the Alarm is cleared, the output relay opens and so does the circuit to Alarm In, which then goes back to its NO state. There is no voltage applied. Voltage is only present when there is a powered sensor (input), powered siren (output) or powered security system control panel connected. The reason you don't need to connect the grounding ports is because both relays share the same path to ground in the camera. Please see Disclaimers below for additional information.
 
+![Jumper Wire](JumperWire.png)
+
 You can and should first read the Disclaimers below and then test this yourself by connecting the ports, enabling your Alarm Input Event and triggering a manual alarm from the Alarm Out event on your camera (don't forget to clear it).
 
 If you can't use the Trigger feature, you can still use the driver to control the arming schedules for all motion detection features, allowing you to arm your cameras based on your mode in HE.
@@ -17,8 +19,6 @@ This driver implements the Actuator and Switch capabilities, which allows you pe
 * Enable/Disable Alarm Input Handling
 * Enable/Disable Motion Detection Features
 * Enable/Disable all Motion Detections at once with the On/Off commands, filtering those features you don't use or wish to leave alone, and simplifying the rules needed to arm and disarm your cameras. This also allows integration with HSM.
-
-![Control Panel](HikvisionDriver.png)
 
 This allows you to trigger alarms on your cameras whenever conditions warrant and use HE to control the arming schedule for the Alarm Input Event and all supported Motion Detection Events in HE, based on changes in mode (home, away, day, night). You can do this by setting the arming schedules on the camera to 24x7 and then running the driver commands to enable/disable motion detection features when the change in mode occurs.
 
