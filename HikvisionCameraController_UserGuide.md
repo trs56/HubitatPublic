@@ -20,7 +20,7 @@ This driver implements the Actuator and Switch capabilities, which allows you pe
 * Enable/Disable Motion Detection Features
 * Enable/Disable all Motion Detections at once with the On/Off commands, filtering those features you don't use or wish to leave alone, and simplifying the rules needed to arm and disarm your cameras. This also allows integration with HSM.
 
-![Control Panel](HikvisionDriver
+![Control Panel](HikvisionDriver.png)
 
 This allows you to trigger alarms on your cameras whenever conditions warrant and use HE to control the arming schedule for the Alarm Input Event and all supported Motion Detection Events in HE, based on changes in mode (home, away, day, night). You can do this by setting the arming schedules on the camera to 24x7 and then running the driver commands to enable/disable motion detection features when the change in mode occurs.
 
