@@ -5,7 +5,7 @@ Unauthorized copy or publication is prohibited.
 ## Prerequisites
 To use the key feature of this driver, which is to trigger Alarm Input Events on your camera using sensors and rules in HE, your camera must have wired Alarm I/O ports that are accessible and not in use. Because for this to work, you will need to connect the In/Out ports with a jumper wire. This will not damage your camera. It is required since the driver is only allowed to trigger Alarm Out when using the Hikvision API. The API does not not allow apps to trigger Alarm In. 
 
-When Alarm Out is triggered, the camera switches a dry contact relay on the ouput port from open to closed, nothing else. This exposes a closed circuit over the jumper wire to the Alarm In port and its relay, which is all it is waiting for in its NO state. When it senses a closed circuit, the Alarm In relay closes and the event fires. When the Alarm is cleared, the output relay opens and so does the circuit to Alarm In, which then goes back to its NO state. There is no voltage applied. Voltage is only present when there is a powered sensor (input), powered siren (output) or powered security system control panel connected. The reason you don't need to connect the grounding ports is because both relays share the same path to ground in the camera. Please see Disclaimers below for additional information.
+When Alarm Out is triggered, the camera switches a dry contact relay on the ouput port from open to closed, nothing else. This exposes a closed circuit over the jumper wire to the Alarm In port and its relay, which is all it is waiting for in its NO state. When it senses a closed circuit, the Alarm In relay closes and the event fires. When the Alarm is cleared, the output relay opens and so does the circuit to Alarm In, which then goes back to its NO state. There is no voltage applied. Voltage is only present when there is a powered sensor (input), powered siren (output) or powered security system control panel connected. The reason you don't need to connect the grounding ports is because both relays share the same path to ground in the camera.
 
 ![Jumper Wire](JumperWire.png)
 
@@ -14,18 +14,14 @@ You can and should first read the Disclaimers below and then test this yourself 
 If you can't use the Trigger feature, you can still use the driver to control the arming schedules for all motion detection features, allowing you to arm your cameras based on your mode in HE.
 The driver also requires specific camera settings, which are described below.
 ## Introduction
-This driver implements the Actuator and Switch capabilities, which allows you perform the following functions by calling the drivers custom commands from your rules and apps. Featires include:
+This driver implements the Actuator and Switch capabilities, which allows you to perform the following functions by calling the drivers custom commands from your rules and apps. Features and functions include:
 * Trigger Alarm Input Events using HE Sensors and Rules
 * Enable/Disable Alarm Input Handling
 * Enable/Disable Motion Detection Features
-* Enable/Disable all Motion Detections at once with the On/Off commands, filtering those features you don't use or wish to leave alone, and simplifying the rules needed to arm and disarm your cameras. This also allows integration with HSM.
+* Enable/Disable all Motion Detection Features with a single On/Off command, filtering those features you don't use or wish to leave alone. Thus simplifying the rules needed to arm and disarm your cameras and allowing for integration with HSM. Your cameras will appear in the lists of lights you can turn on/off when arming/disarming.
 
-This allows you to trigger alarms on your cameras whenever conditions warrant and use HE to control the arming schedule for the Alarm Input Event and all supported Motion Detection Events in HE, based on changes in mode (home, away, day, night). You can do this by setting the arming schedules on the camera to 24x7 and then running the driver commands to enable/disable motion detection features when the change in mode occurs.
+![DevicePage](HikvisionDriver1.png)
 
-### Additional Features Coming Soon in R1.1
-Since I am a new developer on HE, I will be releasing additional features within a week or two after this release to both test and learn how to use the Hubitat Package Manager upgrade process, as both developer and user. If you happen to be reading this, you may want to hold off until R1.1 is available since these new features are key:
-* Switch Capability to Enable (on) or Disable (off) all Motion Detection Features with a single command. This also provides integration with HSM. Your cameras will appear in the list of lights you can turn on/off when arming/disarming.
-* New setting in Preferences to specify which Motion Detection features you are not using in order to exclude them from the On/Off commands and prevent their Enable/Disable commands from being run.
 ## Camera Configuration
 To use the driver, your camera must be configured as follows:
 Please note that the path to the setting on your camera may be different.
