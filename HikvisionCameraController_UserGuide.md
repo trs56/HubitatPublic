@@ -19,9 +19,6 @@ This driver implements the Actuator and Switch capabilities, which allows you to
 * Enable/Disable Alarm Input Handling
 * Enable/Disable Motion Detection Features
 * Enable/Disable all Motion Detection Features with a single On/Off command, filtering those features you don't use or wish to leave alone. Thus simplifying the rules needed to arm and disarm your cameras and allowing for integration with HSM. Your cameras will appear in the lists of lights you can turn on/off when arming/disarming.
-
-![DevicePage](HikvisionDriver1.png)
-
 ## Camera Configuration
 To use the driver, your camera must be configured as follows. It is recommended that you login to the camera directly to make these changes. Do not use the NVR web interface unless you can convert these steps into their equivalent on the NVR. The steps outlined below are for a direct connection only. Please note that the path to the setting on your camera may be different.
  
