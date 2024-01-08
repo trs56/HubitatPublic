@@ -50,9 +50,9 @@ Set Delay to 5 seconds (default)
 Click Advanced button and set appropriate Pre-Record time to accomodate for the delay and other factors unique to your environment, including the sensors and rules you will be using to trigger alarms and recording.
  
 8: **Jumper Wire**   
-Connect the Alarm In/Out ports with a small jumper wire. Thin solid wire works best (e.g. telephone wire). Stranded wired can be difficult to insert and cause short circuits across the ports. The ports will be marked I, O, In, Out, G, or Gnd. You may need a magnifying glass. Connect only the ports marked I/O or In/Out.
+Connect the Alarm In/Out ports with a small jumper wire. Thin solid wire works best (e.g. telephone wire). Stranded wired can be difficult to insert into these ports. The ports will be marked I, O, In, Out, G, or Gnd. **You may need a magnifying glass. Connect only the ports marked I/O or In/Out.**
 
-**NVR Configuration**
+**NVR Configuration**   
 The Virtual Host feature must be enabled and tested (i.e. you can connect to the camera directly using the URL provided by the NVR in Camera Management)
 
 You are now ready to configure your camera for operation with HE using the Hikvision Camera Controller.
