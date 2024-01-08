@@ -56,8 +56,20 @@ You are now ready to configure your camera for operation with HE using the Hikvi
  
 ## Device Configuration and Operation
 1. Add a new Virtual Device using the Hikvision Camera Controller
-2. Enter IP Address, Port, Credentials and Camera Name (as defined on the Camera).
-3. Click Save.
+2. Enter IP Address, Port, Credentials and Camera Name (as defined on the Camera). See notes below.
+3. Now is the time to learn about the filters you will be using to specify which motion detection features you want to enable or disable when running the on/off or enable/disable commands. No filter will default to all available features on your camera when running these commands. Now is also the time to filter any features your camera does not have, so the driver doesn't go looking for them when you save these settings. You may also exclude any features your camera does have but do not want to control using this driver. Exclude takes precedence over include if you accidentally include the same feature in each setting. Once an available feature on your camera has been excluded, you must edit the filter and save preferences to get it back. The state value for excluded features will be set to "NA".
+4. The include/exclude filter is a string of lower case letters where each letter or pair of letters identifies the feature. Here they are:
+* i = Intrusion
+* l = Line Crossing
+* m = Motion Detection
+* p = PIR Sensor
+* re = Region Enter
+* rx = Region Exit
+* bu = Unattended Baggage
+* br = Baggage/Package Removal
+
+6. work in progress
+7. Click Save.
 
 For cameras connected to the NVR POE subnet, use the ip address of the NVR and the Port assigned by the Virtual Host feature. For all other cameras, use the camera ip address and port. Do NOT use the NVR to access a local network camera you have added to the NVR for recording and control purposes.
 
