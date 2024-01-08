@@ -9,7 +9,7 @@ When Alarm Out is triggered, the camera switches a dry contact relay on the oupu
 
 ![Jumper Wire](JumperWire.png)
 
-You can and should first read the Disclaimers below and then test this yourself by connecting the ports, enabling your Alarm Input Event and triggering a manual alarm from the Alarm Out event on your camera (don't forget to clear it).
+You can and should first read the Disclaimers below and then test this yourself by connecting the ports, enabling and arming your Alarm Input and Output Events, and then triggering a manual alarm from the Alarm Out event on your camera (don't forget to clear it).
 
 If you can't use the Trigger feature, you can still use the driver to control the arming schedules for all motion detection features, allowing you to arm your cameras based on your mode in HE.
 The driver also requires specific camera settings, which are described below.
