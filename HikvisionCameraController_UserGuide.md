@@ -23,30 +23,37 @@ This driver implements the Actuator and Switch capabilities, which allows you to
 ![DevicePage](HikvisionDriver1.png)
 
 ## Camera Configuration
-To use the driver, your camera must be configured as follows:
-Please note that the path to the setting on your camera may be different.
+To use the driver, your camera must be configured as follows. It is recommended that you login to the camera directly to make these changes. Do not use the NVR web interface unless you can convert these steps into their equivalent on the NVR. The steps outlined below are for a direct connection only. Please note that the path to the setting on your camera may be different.
  
 1: System > Security > **Web Authentication = digest/basic**
  
 2: Network > Advanced > Integration Protocol > **Hikvision-CGI Enabled, Authentication=digest/basic**
  
-3: Optional **Operator** user account with the **Remote Parameters/Settings and Remote Notify** options selected.   
+3: System > User Management > Optional **Operator** account with the **Remote Parameters/Settings and Remote Notify** options selected.   
 You can use your admin account, but it is **strongly recommended** that you create an Operator account for Hubitat. Do not take chances with your Hikvision admin accounts.
  
 4: **Basic and Smart Events must not be configured to trigger Alarm Out**   
 Check Linkage Methods for all Basic and Smart Events to make sure this option is not selected. HE is now in control.   
  
-5: **Enable Alarm Input Handling in Basic Events > Alarm Input**   
+5: **Basic Events > Alarm Input**   
 Set Alarm Type to NO (is default, normally open)   
-Set the Alarm Name (e.g. CamName Alarm, used in notifications)   
-Set the Arming Schedule to 24x7    
+Set Arming Schedule to 24x7    
+Set optional Alarm Name   
 Set desired Linkage Methods (email, notify, record)
 
-6: In Basic Events > Alarm Output, set Delay to 5 seconds (default)
+6: **Basic Events > Alarm Output**    
+Set Arming Schedule to 24x7   
+Set optional Alarm Name   
+Set Delay to 5 seconds (default)
 
-7: In Storage > Schedule Settings: Click Advanced button and set appropriate Pre-Record time to accomodate for the delay and other factors unique to your environment, including the sensors and rules you will be using to trigger alarms and recording.
+7: **Storage > Schedule Settings**   
+Click Advanced button and set appropriate Pre-Record time to accomodate for the delay and other factors unique to your environment, including the sensors and rules you will be using to trigger alarms and recording.
  
-8: Connect the Alarm In/Out ports with a small jumper wire. Thin solid wire works best (e.g. telephone wire). Stranded wired can be difficult to insert and cause short circuits across the ports.
+8: **Jumper Wire**   
+Connect the Alarm In/Out ports with a small jumper wire. Thin solid wire works best (e.g. telephone wire). Stranded wired can be difficult to insert and cause short circuits across the ports. The ports will be marked I, O, In, Out, G, or Gnd. You may need a magnifying glass. Connect only the ports marked I/O or In/Out.
+
+**NVR Configuration**
+The Virtual Host feature must be enabled and tested (i.e. you can connect to the camera directly using the URL provided by the NVR in Camera Management)
 
 You are now ready to configure your camera for operation with HE using the Hikvision Camera Controller.
  
@@ -59,7 +66,7 @@ For cameras connected to the NVR POE subnet, use the ip address of the NVR and t
 
 Whenever you Save Preferences, the driver will validate your camera by performing these tests:
 1. Ping the ip address to see if it is online.
-2. If online, send a HTTP GET request to get the data from **ipaddress:port/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials.)
+2. If online, send a HTTP GET request to get the data from **ipaddress:port/System/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials.)
 3. If ok, compare the camera name on the camera with the name you entered.
 
 When these checks fail, zStatus will display an error message. If you can't get past this step, please call the help desk to report that you have a Hikvision camera that is not being recognized (see below).
