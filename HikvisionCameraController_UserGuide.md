@@ -47,13 +47,13 @@ Set optional Alarm Name
 Set Delay to 5 seconds (default)
 
 7: **Storage > Schedule Settings**   
-Click Advanced button and set appropriate Pre-Record time to accomodate for the delay and other factors unique to your environment, including the sensors and rules you will be using to trigger alarms and recording.
+Click Advanced button and set appropriate Pre-Record time to accomodate for the factors unique to your environment, including the sensors and rules you will be using to trigger alarms and recording.
  
 8: **Jumper Wire**   
 Connect the Alarm In/Out ports with a small jumper wire. Thin solid wire works best (e.g. telephone wire). Stranded wired can be difficult to insert into these ports. The ports will be marked I, O, In, Out, G, or Gnd. **You may need a magnifying glass. Connect only the ports marked I/O or In/Out.**
 
 **NVR Configuration**   
-The Virtual Host feature must be enabled and tested (i.e. you can connect to the camera directly using the URL provided by the NVR in Camera Management)
+The Virtual Host feature must be enabled and tested (i.e. you can connect your browser to the camera directly using the URL provided by the NVR in Camera Management)
 
 You are now ready to configure your camera for operation with HE using the Hikvision Camera Controller.
  
@@ -79,13 +79,13 @@ You may now start running commands and create test rules to validate its operati
 
 Start with turning your motion sensors on/off and watch the change in state. Confirm the change in state on your camera.
 
-Enable the Alarm Input Event and turn the Alarm On to confirm you receive the notifications you have configured for the event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is, considering the Delay you have configured for the Alarm Out Event.
+Enable Alarm Input Handling and turn the Alarm On to confirm you receive the notifications you have configured for the event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is, considering the Delay you have configured for the Alarm Out Event.
 
 Do not forget to turn the Alarm OFF in your rules when conditions go back to normal. If you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off.
 
 Test the on/off commands. Configure the filter using a lower case string of letters to indicate which features you want to exclude. The driver is only looking for lower case "i, l, m, p", where i = Intrusion, etc.  If it finds one of those characters, the corresponding feature will be excluded.
 
-The Get Status command (not shown in the image above) will get the current state of all features from the camera and update the status attributes on the device, if needed. This command is there for you to confirm state changes as you develop your rules for implementation. It is also the only command that will refresh the current state of the Alarm Input port. Do not call Get Status from any rules.
+Get Status will get the current state of all features from the camera and update the status attributes on the device, if needed. This command is there for you to confirm state changes as you develop your rules for implementation. It is also the only command that will refresh the current state of the Alarm Input port. Do not call Get Status from any rules.
 ### In Summary
 This driver gives you the flexibility to trigger your cameras with more reliable and consistent PIR sensors, or any other sensor. For example, when you're away and your house is armed, you can trigger all of your cameras if any one of your security sensors goes off.
 
