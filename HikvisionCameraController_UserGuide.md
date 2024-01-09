@@ -78,7 +78,7 @@ For cameras connected to the NVR POE subnet, use the ip address of the NVR and t
 4. Enter the filter to be applied when running the On/Off commands. If no filter is specified, "all available motion detection features" will be enabled or disabled when these commands are run. Leave blank for starters.    
 ![OnOffFilter](zDriverPref2.png)
 
-5. Enter the filter to exclude features you don't use and those your camera does not have. Its important to filter features you have but don't use to prevent the driver from changing its state when switching "all available". If you leave this filter blank and Save Preferences, the driver tries to get status for all supported features from your camera. If the URL Path to a feature on your camera is "not found", a benign error is logged and the feature state set to "NA", same as entering the filter here does, without the lookup and resulting error. **For starters**, leave this filter empty and let the driver see what it can find. Then come back and filter those you don't use, and those it didn't find so next time you save, it doesn't go through the trouble. Check the logs after you save.   
+5. Enter the filter to exclude features you don't use and those your camera does not have. Its important to filter features you have but don't use to prevent the driver from changing its state when switching "all available". If you leave this filter blank and Save Preferences, the driver tries to get status for all supported features from your camera. If the URL Path to a feature on your camera is "not found", a benign error is logged and the feature state set to "NA", same as entering the filter here does, without the lookup and resulting error. ***For starters, leave this filter empty and let the driver see what it can find. Then come back and filter those you don't use, and those it didn't find so next time you save, it doesn't go through the trouble.*** Check the logs after you save.   
 ![ExcludeFilter](zDriverPref3.png)
 6. Operations Note: The On/Off and Enable/Disable commands perform the same function. The only difference is that On/Off uses a pre-defined filter in Preference Settings and Enable/Disable uses a variable filter that you supply at run time. The On/Off command allows integration with HSM. Without it, you could not arm your cameras when arming your other security sensors.
 7. Operations Note: Alarm Input Handling is not included when enabling/disabling "all available" since it is not a motion detection feature and serves a different purpose.
@@ -125,8 +125,8 @@ The driver logs all of its activity and catches all errors from the HTTP GET/PUT
 If the driver stops working, check the logs and call the help desk.
  
 Debug logging is used for dumping the raw or converted to GPath XML data that is returned by the camera in response to a GET request. This will aid in determining where the data has gone bad when unexpected java/groovy script errors occur.
-## Supported Cameras and NVRs
-work in progress
+## Resources for Development 
+This driver was developed using the standards and specifications outlined in the Hikvision IPMD and ISAPI User Guides, which defines the underlying Hikvision XML Schemas and operations. This API has existed for many years and is deployed across the entire range of Hikvision products. It is also used by a wide range of corporate partners and customer applicattions.
 ## Security Warning
 This driver uses HTTP Basic Authentication to login to your camera. Your encoded credentials are saved and displayed in the Data section of the device in the format required for this method of authentication.
 ## Help Desk - Contact for Support
