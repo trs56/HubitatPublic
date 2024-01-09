@@ -14,11 +14,11 @@ You can and should first read the Disclaimers below and then test this yourself 
 If you can't use the Trigger feature, you can still use the driver to control the arming schedules for all motion detection features, allowing you to arm your cameras based on your mode in HE.
 The driver also requires specific camera settings, which are described below.
 ## Introduction
-This driver implements the Actuator and Switch capabilities, which allows you to perform the following functions by calling the drivers custom commands from your rules and apps. Features and functions include:
+This driver implements the Actuator and Switch capabilities. Its commands allows you to:
 * Trigger Alarm Input Events using HE Sensors and Rules
 * Enable/Disable Alarm Input Handling
 * Enable/Disable Motion Detection Features
-* Enable/Disable all Motion Detection Features with a single On/Off or Enable/Disable command, filtering those features you don't use or wish to leave alone. Thus simplifying the rules needed to arm and disarm your cameras and allowing for integration with HSM. Your cameras will appear in the lists of lights you can turn on/off when arming/disarming.
+* Enable/Disable all Motion Detection Features with a single On/Off or Enable/Disable command, filtering those features you don't use or wish to leave alone. Thus simplifying the rules needed to arm and disarm your cameras and allowing for integration with HSM. Your cameras will appear in the list of lights you can turn on/off when arming/disarming.
 
 ![DriverPage](zDriverPage.png)
 
