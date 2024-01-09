@@ -56,9 +56,12 @@ You are now ready to configure your camera for operation with HE using the Hikvi
  
 ## Device Configuration and Operation
 1. Add a new Virtual Device using the Hikvision Camera Controller
-2. Enter IP Address, Port, Credentials and Camera Name (as defined on the Camera). See notes below.
-3. Now is the time to learn about the filters you will be using to specify which motion detection features you want to enable or disable when running the on/off or enable/disable commands. No filter will default to all available features on your camera when running these commands. Now is also the time to filter any features your camera does not have, so the driver doesn't go looking for them when you save these settings. You may also exclude any features your camera does have but do not want to control using this driver. Exclude takes precedence over include if you accidentally include the same feature in each setting. Once an available feature on your camera has been excluded, you must edit the filter and save preferences to get it back. The state value for excluded features will be set to "NA".
-4. The include/exclude filter is a string of lower case letters where each letter or pair of letters identifies the feature. Here they are:
+2. Enter IP Address, Port, Credentials and Camera Name (as defined on the Camera).
+
+For cameras connected to the NVR POE subnet, use the ip address of the NVR and the Port assigned by the Virtual Host feature. For all other cameras, use the camera ip address and port. Do NOT use the NVR to access a local network camera you have added to the NVR for recording and control purposes.
+
+4. Now is the time to learn about the filters you will be using to specify which features you want to control (enable/disable) when running the drivers commands. The filter is a string of lower case letters where each unique letter or pair of letters identifies the feature:
+* a = Alarm Input Handling
 * i = Intrusion
 * l = Line Crossing
 * m = Motion Detection
@@ -68,10 +71,13 @@ You are now ready to configure your camera for operation with HE using the Hikvi
 * bu = Unattended Baggage
 * br = Baggage/Package Removal
 
-6. work in progress
-7. Click Save.
+5. Here you will enter the filter to be applied when running the On/Off commands. If no filter is specified, "all available motion detection features" will be enabled or disabled when these commands are run, with the exception of Alarm In, which is not a motion detection feature.  Alarm Input Handling can only be enabled/disabled by including it here (requiring all other features you want to set be in the filter), or in the filter parameter of the Enable/Disable commands. This is by design since you may want to leave Alarm Input Handling enabled 24x7 to accept triggers from HE that are not security related, and whether your system is armed or not.
 
-For cameras connected to the NVR POE subnet, use the ip address of the NVR and the Port assigned by the Virtual Host feature. For all other cameras, use the camera ip address and port. Do NOT use the NVR to access a local network camera you have added to the NVR for recording and control purposes.
+6. Here you will enter the filter to exclude features from driver control. Enter the features you don't use and those your camera does not have. For example, if you don't use the Face Detection feature, include "f" in this filter to prevent the driver from changing its state when switching "all available".
+
+7. work in progress
+8. Click Save.
+
 
 Whenever you Save Preferences, the driver will validate your camera by performing these tests:
 1. Ping the ip address to see if it is online.
