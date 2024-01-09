@@ -94,20 +94,17 @@ When these checks fail, zStatus will display an error message. If you can't get 
  
 When all is well, zStatus will say Yay! Your camera has been validated and is ready for operation.
  
-If a motion detection feature is not available on your camera and was not exluded by the driver control filter, its status will be set to NA and all commands for that feature will be disabled.
+If a motion detection feature is not available on your camera and was not exluded by the driver control filter, its status will be set to NA.
  
 You may now start running commands and create test rules to validate its operation.
 
-Start with turning your motion sensors on/off and watch the change in state. Confirm the change in state on your camera.
-
-Enable Alarm Input Handling and turn the Alarm On to confirm you receive the notifications you have configured for the event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
-
-IMPORTANT: Do not forget to turn the Alarm OFF in your rules when conditions go back to normal. If you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off. Forgetting to turn off the alarm will eventully lead the camera to send out notifications every minute that the alarm reamins active. Not all cameras will behave the same. Do not forget to turn the lights off.
-
-Test the On/Off commands and watch all of your available features change state. Check the log to see the results.
+Start with turning your motion detection features On/Off and watch the change in state.
 
 Test the Enable/Disable commands with and without filters and confirm the state changes. Check the log to see the results.
 
+Enable Alarm Input Handling and turn the Alarm On to confirm you receive the notifications you have configured for the event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
+
+IMPORTANT: Do not forget to turn the Alarm OFF in your rules when conditions go back to normal. If you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off. Forgetting to turn off the alarm will eventully lead the camera to send out notifications every minute that the alarm is active. Not all cameras will behave the same. **Do not forget to turn the lights off.**
 ### In Summary
 This driver gives you the flexibility to trigger your cameras with more reliable and consistent PIR sensors, or any other sensor. For example, when you're away and your house is armed, you can trigger all of your cameras if any one of your security sensors goes off.
 
