@@ -61,9 +61,9 @@ You are now ready to configure your camera for operation with HE using the Hikvi
 1. Add a new Virtual Device using the Hikvision Camera Controller
 2. Enter IP Address, Port, Credentials and Camera Name (as defined on the Camera).
 
-For cameras connected to the NVR POE subnet, use the ip address of the NVR and the Port assigned by the Virtual Host feature. For all other cameras, use the camera ip address and port. Do NOT use the NVR to access a local network camera you have added to the NVR for recording and control purposes.
+For cameras connected to the NVR POE subnet, use the ip address of the NVR and the Port assigned by the Virtual Host feature. For all other cameras, use the cameras ip address and HTTP port.
 
-4. Now is the time to learn about the filters you will be using to specify which features you want to control (enable/disable) when running the drivers commands. The filter is a string of lower case letters where each unique letter or pair of letters identifies the feature:
+3. Now is the time to learn about the filters you will be using to specify which features you want to control (enable/disable) when running the drivers commands. The filter is a string of lower case letters where each unique letter or pair of letters identifies the feature:
 * a = Alarm Input Handling
 * i = Intrusion
 * l = Line Crossing
@@ -75,22 +75,21 @@ For cameras connected to the NVR POE subnet, use the ip address of the NVR and t
 * br = Baggage/Package Removal
 * When entering filter strings, formatting and order are not important. Extraneous characters are ignored. Commas improve readability here but aren't needed.
 
-5. Enter the filter to be applied when running the On/Off commands. If no filter is specified, "all available motion detection features" will be enabled or disabled when these commands are run. Leave blank for starters. Note: Alarm Input Handling is not included by default when enabling/disabling "all available" since it is not a motion detection feature and serves a different purpose.
- 
+4. Enter the filter to be applied when running the On/Off commands. If no filter is specified, "all available motion detection features" will be enabled or disabled when these commands are run. Leave blank for starters.    
 ![OnOffFilter](zDriverPref2.png)
 
-7. Enter the filter to exclude features you don't use and those your camera does not have. For example, if you don't use the Face Detection feature, include "f" in this filter to prevent the driver from changing its state when switching "all available". If you leave this filter blank and Save Preferences, the driver will attempt to get status for all of its supported features from your camera. If the URL Path to the feature on your camera was "not found", a benign error will be logged and the feature state will be set to "NA", same as entering the filter here does, without the lookup and HTTP GET error.  For starters, leave this filter empty and let the driver see what it can find. Then come back and filter those you don't use, and those it didn't find so next time you save, it doesn't go through the trouble. Check the logs after you save.
-
+5. Enter the filter to exclude features you don't use and those your camera does not have. Its important to filter features you have but don't use to prevent the driver from changing its state when switching "all available". If you leave this filter blank and Save Preferences, the driver tries to get status for all supported features from your camera. If the URL Path to a feature on your camera is "not found", a benign error is logged and the feature state set to "NA", same as entering the filter here does, without the lookup and resulting error. **For starters**, leave this filter empty and let the driver see what it can find. Then come back and filter those you don't use, and those it didn't find so next time you save, it doesn't go through the trouble. Check the logs after you save.   
 ![ExcludeFilter](zDriverPref3.png)
-
-7. Click Save.
-
+6. Operations Note: The On/Off and Enable/Disable commands perform the same function. The only difference is that On/Off uses a pre-defined filter in Preference Settings and Enable/Disable uses a variable filter that you supply at run time. The On/Off command allows integration with HSM. Without it, you could not arm your cameras when arming your other security sensors.
+7. Operations Note: Alarm Input Handling is not included by default when enabling/disabling "all available" since it is not a motion detection feature and serves a different purpose.
+8. Click Save.
+### Saving Preferences - Camera Validation
 Every time you Save Preferences, the driver will validate your camera by performing these tests:
 1. Ping the ip address to see if it is online.
-2. If online, send a GET request to **http://ipaddress:port/ISAPI/System/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials. You can do the same with all of the GET PATHS you see in the log.)
-3. If ok, compare the camera name on the camera with the name you entered.
+2. If online, send a GET request to **http://ipaddress:port/ISAPI/System/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials. You can do the same with all of the GET PATHS you see in the log.) If successful, the driver will extract the camera name, model and firmware version from the response and save those values in Data fields, along with your encoded credentials. If not successful, zStatus will display an error message that may help you fix the problem.
+3. Compare the camera name with the name you entered. This test is important for you to insure you are connecting to the right camera. One digit off in your ip or port and you might never know it.
 
-When these checks fail, zStatus will display an error message. If you can't get past this step, please call the help desk to report that you have a Hikvision camera that is not being recognized (see below).
+When these checks fail, zStatus will display an error message and disable the commands. If you can't get past this step, please call the help desk to report that you have a Hikvision camera that is not being recognized (see below).
  
 When all is well, zStatus will say Yay! Your camera has been validated and is ready for operation. Check the log to see what it reported back on.
  
