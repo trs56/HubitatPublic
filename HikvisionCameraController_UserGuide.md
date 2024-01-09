@@ -94,13 +94,11 @@ When these checks fail, zStatus will display an error message. If you can't get 
  
 When all is well, zStatus will say Yay! Your camera has been validated and is ready for operation. Check the log to see what it reported back on.
  
-If a motion detection feature is not available on your camera and was not exluded by the driver control filter, its status will be set to NA.
- 
 You may now start running commands and create test rules to validate its operation.
 
 Start with turning your motion detection features On/Off and watch the change in state. Check the log to see the results. Check Events, too. State changes will be posted immediately using sendEvent but there may be queuing delays in HE.
 
-Test the Enable/Disable commands with and without filters and confirm the state changes. Check the log to see the results.
+Test the Enable/Disable commands with and without filters and confirm the state changes. Check the log to see the results. Try enabling or disabling features that are already in that state, then check the log.
 
 Enable Alarm Input Handling using the Enable command with the filter "a" and then turn the Alarm On to confirm you receive the notifications you have configured for the event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
 
