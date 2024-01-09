@@ -92,9 +92,11 @@ Every time you Save Preferences, the driver will validate your camera by perform
 When these checks fail, zStatus will display an appropriate error message that may help you fix the problem. It will also prevent you from running any commands. If you can't get past this step, please call the help desk to report that you have a Hikvision camera that is not being recognized and see below for more information on supported cameras and NVRs.
  
 When all is well, zStatus will say, Yay! Your camera has been validated and is ready for operation. Check the log to see what it reported back on.
- 
-You may now start running commands and create test rules to validate its operation.
 
+**Now is the time to set your Exclude filter if you have not done so, and Save again.**
+
+You may now start running commands and create test rules to validate its operation.
+## Operations
 Start with turning your motion detection features On/Off and watch the change in state. Check the log to see the results. Check Events, too. State changes will be posted immediately using sendEvent but there may be queuing delays in HE.
 
 Test the Enable/Disable commands with and without filters and confirm the state changes. Check the log to see the results. Try enabling or disabling features that are already in that state, then check the log.
@@ -114,8 +116,6 @@ The status attributes change when a command is run that triggers it. The driver 
 
 During normal operation, zStatus should remain OK at all times. All commands ping the ip first to see if it is online. If the ping fails, zStatus will go to OFF and remain OFF until a command is run that sees it back online.
  
-Note: The Alarm In State of the wired port will not change to active/inactive on screen when Alarm Out is triggered or cleared. The only command that updates Alarm In state is Get Status, and when Saving Preferences. Use Get Status while testing to confirm the requested state change.
-
 If you change the credentials of the hubitat account on the camera and forget to change them here, the next time a command is run, zStatus will be set to CRED and operation suspended until you Save Preferences to fix the mis-match.
  
 If any unexpected HTTP GET/PUT errors occur, zStatus will go to ERR and operation suspended until the problem is resolved and Save Preferences is run. These errors may require a call to the help desk.
@@ -125,6 +125,8 @@ The driver logs all of its activity and catches all errors from the HTTP GET/PUT
 If the driver stops working, check the logs and call the help desk.
  
 Debug logging is used for dumping the raw or converted to GPath XML data that is returned by the camera in response to a GET request. This will aid in determining where the data has gone bad when unexpected java/groovy script errors occur.
+## Supported Cameras and NVRs
+Should work with all! More to come.
 ## Resources for Development 
 This driver was developed using the standards and specifications outlined in the Hikvision IPMD and ISAPI User Guides, which defines the underlying Hikvision XML Schemas and operations. This API has existed for many years and is deployed across the entire range of Hikvision products. It is also used by a wide range of corporate partners and customer applicattions.
 ## Security Warning
