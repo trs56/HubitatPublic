@@ -14,7 +14,7 @@ You can and should first read the Disclaimers below and then test this yourself 
 If you can't use the Trigger feature, you can still use the driver to control the arming schedules for all motion detection features, allowing you to arm your cameras based on your mode in HE.
 The driver also requires specific camera settings, which are described below.
 ## Introduction
-This driver implements the Actuator and Switch capabilities. Its commands allows you to:
+This driver implements the Actuator and Switch capabilities. Its commands allow you to perform the following functions:
 * Trigger Alarm Input Events using HE Sensors and Rules
 * Enable/Disable Alarm Input Handling
 * Enable/Disable Motion Detection Features
