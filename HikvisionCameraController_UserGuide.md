@@ -81,17 +81,17 @@ For cameras connected to the NVR POE subnet, use the ip address of the NVR and t
 5. Enter the filter to exclude features you don't use and those your camera does not have. Its important to filter features you have but don't use to prevent the driver from changing its state when switching "all available". If you leave this filter blank and Save Preferences, the driver tries to get status for all supported features from your camera. If the URL Path to a feature on your camera is "not found", a benign error is logged and the feature state set to "NA", same as entering the filter here does, without the lookup and resulting error. **For starters**, leave this filter empty and let the driver see what it can find. Then come back and filter those you don't use, and those it didn't find so next time you save, it doesn't go through the trouble. Check the logs after you save.   
 ![ExcludeFilter](zDriverPref3.png)
 6. Operations Note: The On/Off and Enable/Disable commands perform the same function. The only difference is that On/Off uses a pre-defined filter in Preference Settings and Enable/Disable uses a variable filter that you supply at run time. The On/Off command allows integration with HSM. Without it, you could not arm your cameras when arming your other security sensors.
-7. Operations Note: Alarm Input Handling is not included by default when enabling/disabling "all available" since it is not a motion detection feature and serves a different purpose.
+7. Operations Note: Alarm Input Handling is not included when enabling/disabling "all available" since it is not a motion detection feature and serves a different purpose.
 8. Click Save.
 ### Saving Preferences - Camera Validation
 Every time you Save Preferences, the driver will validate your camera by performing these tests:
 1. Ping the ip address to see if it is online.
-2. If online, send a GET request to **http://ipaddress:port/ISAPI/System/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials. You can do the same with all of the GET PATHS you see in the log.) If successful, the driver will extract the camera name, model and firmware version from the response and save those values in Data fields, along with your encoded credentials. If not successful, zStatus will display an error message that may help you fix the problem.
+2. If online, send a GET request to **http://ipaddress:port/ISAPI/System/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials. You can do the same with all of the GET PATHS you see in the log.) If successful, the driver will extract the camera name, model and firmware version from the response and save those values in Data fields, along with your encoded credentials.
 3. Compare the camera name with the name you entered. This test is important for you to insure you are connecting to the right camera. One digit off in your ip or port and you might never know it.
 
-When these checks fail, zStatus will display an error message and disable the commands. If you can't get past this step, please call the help desk to report that you have a Hikvision camera that is not being recognized (see below).
+When these checks fail, zStatus will display an appropriate error message that may help you fix the problem. It will also prevent you from running any commands. If you can't get past this step, please call the help desk to report that you have a Hikvision camera that is not being recognized and see below for more information on supported cameras and NVRs.
  
-When all is well, zStatus will say Yay! Your camera has been validated and is ready for operation. Check the log to see what it reported back on.
+When all is well, zStatus will say, Yay! Your camera has been validated and is ready for operation. Check the log to see what it reported back on.
  
 You may now start running commands and create test rules to validate its operation.
 
