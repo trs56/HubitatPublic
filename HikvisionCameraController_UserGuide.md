@@ -75,28 +75,26 @@ For cameras connected to the NVR POE subnet, use the ip address of the NVR and t
 * br = Baggage/Package Removal
 * When entering filter strings, formatting and order are not important. Extraneous characters are ignored. Commas improve readability here but aren't needed.
 
+5. Enter the filter to be applied when running the On/Off commands. If no filter is specified, "all available motion detection features" will be enabled or disabled when these commands are run. Leave blank for starters. Note: Alarm Input Handling is not included by default when enabling/disabling "all available" since it is not a motion detection feature. See Driver Operation notes below for more information.
+ 
 ![OnOffFilter](zDriverPref2.png)
 
-5. Here you will enter the filter to be applied when running the On/Off commands. If no filter is specified, "all available motion detection features" will be enabled or disabled when these commands are run, with the exception of Alarm In, which is not a motion detection feature.  Alarm Input Handling can only be enabled/disabled by including it here (requiring all other features you want to set be in the filter), or in the filter parameter of the Enable/Disable commands. This is by design since you may want to leave Alarm Input Handling enabled 24x7 to accept triggers from HE that are not security related, and whether your system is armed or not.
-
-6. Here you will enter the filter to exclude features from driver control. Enter the features you don't use and those your camera does not have. For example, if you don't use the Face Detection feature, include "f" in this filter to prevent the driver from changing its state when switching "all available".
+7. Enter the filter to exclude features you don't use and those your camera does not have. For example, if you don't use the Face Detection feature, include "f" in this filter to prevent the driver from changing its state when switching "all available". If you leave this filter blank and save preferences, the driver will attemp to get status for all of these features from your camera. If the feature was "not found", a benign error will be logged and the feature state will be set to "NA", same as entering the filter here does, without the lookup.
 
 ![ExcludeFilter](zDriverPref3.png)
 
-8. work in progress
-9. Click Save.
-
+7. Click Save.
 
 Whenever you Save Preferences, the driver will validate your camera by performing these tests:
 1. Ping the ip address to see if it is online.
-2. If online, send a HTTP GET request to get the data from **ipaddress:port/System/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials.)
+2. If online, send a HTTP GET request to get the data from **ipaddress:port/ISAPI/System/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials. You can do the same with all of the GET PATHS you see in the log.)
 3. If ok, compare the camera name on the camera with the name you entered.
 
 When these checks fail, zStatus will display an error message. If you can't get past this step, please call the help desk to report that you have a Hikvision camera that is not being recognized (see below).
  
 When all is well, zStatus will say Yay! Your camera has been validated and is ready for operation.
  
-If a motion detection feature is not available on your camera, its status will be set to NA and the on/off commands for that feature will be disabled.
+If a motion detection feature is not available on your camera and was not exluded by the driver control filter, its status will be set to NA and all commands for that feature will be disabled.
  
 You may now start running commands and create test rules to validate its operation.
 
