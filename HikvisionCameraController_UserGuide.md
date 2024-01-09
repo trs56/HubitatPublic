@@ -19,6 +19,9 @@ This driver implements the Actuator and Switch capabilities, which allows you to
 * Enable/Disable Alarm Input Handling
 * Enable/Disable Motion Detection Features
 * Enable/Disable all Motion Detection Features with a single On/Off command, filtering those features you don't use or wish to leave alone. Thus simplifying the rules needed to arm and disarm your cameras and allowing for integration with HSM. Your cameras will appear in the lists of lights you can turn on/off when arming/disarming.
+
+![DriverPage](zDriverPage.png)
+
 ## Camera Configuration
 To use the driver, your camera must be configured as follows. It is recommended that you login to the camera directly to make these changes. Do not use the NVR web interface unless you can convert these steps into their equivalent on the NVR. The steps outlined below are for a direct connection only. Please note that the path to the setting on your camera may be different.
  
@@ -71,12 +74,16 @@ For cameras connected to the NVR POE subnet, use the ip address of the NVR and t
 * bu = Unattended Baggage
 * br = Baggage/Package Removal
 
+![OnOffFilter](zDriverPref2.png)
+
 5. Here you will enter the filter to be applied when running the On/Off commands. If no filter is specified, "all available motion detection features" will be enabled or disabled when these commands are run, with the exception of Alarm In, which is not a motion detection feature.  Alarm Input Handling can only be enabled/disabled by including it here (requiring all other features you want to set be in the filter), or in the filter parameter of the Enable/Disable commands. This is by design since you may want to leave Alarm Input Handling enabled 24x7 to accept triggers from HE that are not security related, and whether your system is armed or not.
 
 6. Here you will enter the filter to exclude features from driver control. Enter the features you don't use and those your camera does not have. For example, if you don't use the Face Detection feature, include "f" in this filter to prevent the driver from changing its state when switching "all available".
 
-7. work in progress
-8. Click Save.
+![ExcludeFilter](zDriverPref3.png)
+
+8. work in progress
+9. Click Save.
 
 
 Whenever you Save Preferences, the driver will validate your camera by performing these tests:
