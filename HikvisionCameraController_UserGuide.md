@@ -79,7 +79,7 @@ For cameras connected to the NVR POE subnet, use the ip address of the NVR and t
  
 ![OnOffFilter](zDriverPref2.png)
 
-7. Enter the filter to exclude features you don't use and those your camera does not have. For example, if you don't use the Face Detection feature, include "f" in this filter to prevent the driver from changing its state when switching "all available". If you leave this filter blank and Save Preferences, the driver will attempt to get status for all of its supported features from your camera. If the URL Path to the feature on your camera was "not found", a benign error will be logged and the feature state will be set to "NA", same as entering the filter here does, without the lookup and HTTP GET error.
+7. Enter the filter to exclude features you don't use and those your camera does not have. For example, if you don't use the Face Detection feature, include "f" in this filter to prevent the driver from changing its state when switching "all available". If you leave this filter blank and Save Preferences, the driver will attempt to get status for all of its supported features from your camera. If the URL Path to the feature on your camera was "not found", a benign error will be logged and the feature state will be set to "NA", same as entering the filter here does, without the lookup and HTTP GET error.  For starters, leave this filter empty and let the driver see what it can find. Then come back and filter those you don't use, and those it didn't find so next time you save, it doesn't go through the trouble. Check the logs after you save.
 
 ![ExcludeFilter](zDriverPref3.png)
 
@@ -92,7 +92,7 @@ Every time you Save Preferences, the driver will validate your camera by perform
 
 When these checks fail, zStatus will display an error message. If you can't get past this step, please call the help desk to report that you have a Hikvision camera that is not being recognized (see below).
  
-When all is well, zStatus will say Yay! Your camera has been validated and is ready for operation.
+When all is well, zStatus will say Yay! Your camera has been validated and is ready for operation. Check the log to see what it reported back on.
  
 If a motion detection feature is not available on your camera and was not exluded by the driver control filter, its status will be set to NA.
  
