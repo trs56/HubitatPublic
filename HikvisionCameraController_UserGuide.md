@@ -18,7 +18,7 @@ This driver implements the Actuator and Switch capabilities, which allows you to
 * Trigger Alarm Input Events using HE Sensors and Rules
 * Enable/Disable Alarm Input Handling
 * Enable/Disable Motion Detection Features
-* Enable/Disable all Motion Detection Features with a single On/Off command, filtering those features you don't use or wish to leave alone. Thus simplifying the rules needed to arm and disarm your cameras and allowing for integration with HSM. Your cameras will appear in the lists of lights you can turn on/off when arming/disarming.
+* Enable/Disable all Motion Detection Features with a single On/Off or Enable/Disable command, filtering those features you don't use or wish to leave alone. Thus simplifying the rules needed to arm and disarm your cameras and allowing for integration with HSM. Your cameras will appear in the lists of lights you can turn on/off when arming/disarming.
 
 ![DriverPage](zDriverPage.png)
 
