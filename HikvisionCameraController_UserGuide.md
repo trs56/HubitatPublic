@@ -73,6 +73,7 @@ For cameras connected to the NVR POE subnet, use the ip address of the NVR and t
 * rx = Region Exit
 * bu = Unattended Baggage
 * br = Baggage/Package Removal
+* When entering filter strings, formatting and order are not important. Extraneous characters are ignored. Commas improve readability here but aren't needed.
 
 ![OnOffFilter](zDriverPref2.png)
 
