@@ -101,7 +101,7 @@ Start with turning your motion detection features On/Off and watch the change in
 
 Test the Enable/Disable commands with and without filters and confirm the state changes. Check the log to see the results. Try enabling or disabling features that are already in that state, then check the log.
 
-Enable Alarm Input Handling using the Enable command with the filter "a" and then turn the Alarm On to confirm you receive the notifications you have configured for the event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
+Enable Alarm Input Handling using the Enable command with the filter "a" and then turn the Alarm On to confirm you receive the notifications you have configured for the event. If you don't, first make sure the Alarm Input event is armed on the camera (arming schedule set). If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
 
 IMPORTANT: Do not forget to turn the Alarm OFF in your rules when conditions go back to normal. If you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off. Forgetting to turn off the alarm will eventully lead the camera to send out notifications every minute that the alarm is active. Not all cameras will behave the same. **Do not forget to turn the lights off.**
 
