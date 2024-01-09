@@ -75,17 +75,17 @@ For cameras connected to the NVR POE subnet, use the ip address of the NVR and t
 * br = Baggage/Package Removal
 * When entering filter strings, formatting and order are not important. Extraneous characters are ignored. Commas improve readability here but aren't needed.
 
-5. Enter the filter to be applied when running the On/Off commands. If no filter is specified, "all available motion detection features" will be enabled or disabled when these commands are run. Leave blank for starters. Note: Alarm Input Handling is not included by default when enabling/disabling "all available" since it is not a motion detection feature. See Driver Operation notes below for more information.
+5. Enter the filter to be applied when running the On/Off commands. If no filter is specified, "all available motion detection features" will be enabled or disabled when these commands are run. Leave blank for starters. Note: Alarm Input Handling is not included by default when enabling/disabling "all available" since it is not a motion detection feature and serves a different purpose.
  
 ![OnOffFilter](zDriverPref2.png)
 
-7. Enter the filter to exclude features you don't use and those your camera does not have. For example, if you don't use the Face Detection feature, include "f" in this filter to prevent the driver from changing its state when switching "all available". If you leave this filter blank and save preferences, the driver will attemp to get status for all of these features from your camera. If the feature was "not found", a benign error will be logged and the feature state will be set to "NA", same as entering the filter here does, without the lookup.
+7. Enter the filter to exclude features you don't use and those your camera does not have. For example, if you don't use the Face Detection feature, include "f" in this filter to prevent the driver from changing its state when switching "all available". If you leave this filter blank and Save Preferences, the driver will attempt to get status for all of its supported features from your camera. If the URL Path to the feature on your camera was "not found", a benign error will be logged and the feature state will be set to "NA", same as entering the filter here does, without the lookup and HTTP GET error.
 
 ![ExcludeFilter](zDriverPref3.png)
 
 7. Click Save.
 
-Whenever you Save Preferences, the driver will validate your camera by performing these tests:
+Every time you Save Preferences, the driver will validate your camera by performing these tests:
 1. Ping the ip address to see if it is online.
 2. If online, send a GET request to **http://ipaddress:port/ISAPI/System/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials. You can do the same with all of the GET PATHS you see in the log.)
 3. If ok, compare the camera name on the camera with the name you entered.
@@ -98,13 +98,16 @@ If a motion detection feature is not available on your camera and was not exlude
  
 You may now start running commands and create test rules to validate its operation.
 
-Start with turning your motion detection features On/Off and watch the change in state.
+Start with turning your motion detection features On/Off and watch the change in state. Check the log to see the results. Check Events, too. State changes will be posted immediately using sendEvent but there may be queuing delays in HE.
 
 Test the Enable/Disable commands with and without filters and confirm the state changes. Check the log to see the results.
 
-Enable Alarm Input Handling and turn the Alarm On to confirm you receive the notifications you have configured for the event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
+Enable Alarm Input Handling using the Enable command with the filter "a" and then turn the Alarm On to confirm you receive the notifications you have configured for the event. If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
 
 IMPORTANT: Do not forget to turn the Alarm OFF in your rules when conditions go back to normal. If you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off. Forgetting to turn off the alarm will eventully lead the camera to send out notifications every minute that the alarm is active. Not all cameras will behave the same. **Do not forget to turn the lights off.**
+
+Note: By design, the Alarm Input Handling event is NOT included by default when running On/Off or Enable/Disable commands with no filter (i.e. switch "all available"). You need to control the enabled/disabled state of that event separately.
+
 ### In Summary
 This driver gives you the flexibility to trigger your cameras with more reliable and consistent PIR sensors, or any other sensor. For example, when you're away and your house is armed, you can trigger all of your cameras if any one of your security sensors goes off.
 
@@ -125,6 +128,8 @@ The driver logs all of its activity and catches all errors from the HTTP GET/PUT
 If the driver stops working, check the logs and call the help desk.
  
 Debug logging is used for dumping the raw or converted to GPath XML data that is returned by the camera in response to a GET request. This will aid in determining where the data has gone bad when unexpected java/groovy script errors occur.
+## Supported Cameras and NVRs
+work in progress
 ## Security Warning
 This driver uses HTTP Basic Authentication to login to your camera. Your encoded credentials are saved and displayed in the Data section of the device in the format required for this method of authentication.
 ## Help Desk - Contact for Support
