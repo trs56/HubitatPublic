@@ -105,7 +105,7 @@ Enable Alarm Input Handling using the Enable command with the filter "a" and the
 
 Once you have verified operations using the driver device page, create a simple test rule to trigger an alarm using one of your security sensors.
 
-To run the Alarm On/Off and Enable/Disable commmands from Basic rules or RM, select the action type to _run... custom commands_ and then select Actuator devices.
+To run the Alarm On/Off and Enable/Disable commmands from RM, select Action type ___Set Variable, Mode or File, Run Custom Action___, then select Action ___Run Custom Action___, then select ___Actuator___ devices.
 
 Create test rules to Enable/Disable features when mode changes. You can be selective. 
 
