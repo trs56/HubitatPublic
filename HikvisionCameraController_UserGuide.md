@@ -103,7 +103,17 @@ Test the Enable/Disable commands with and without filters and confirm the state 
 
 Enable Alarm Input Handling using the Enable command with the filter "a" and then turn the Alarm On to confirm you receive the notifications you have configured for the event. If you don't, first make sure the Alarm Input event is armed on the camera (arming schedule set). If you have a camera with a siren, check that option under Linkage Methods to see how fast the trigger is.
 
-IMPORTANT: Do not forget to turn the Alarm OFF in your rules when conditions go back to normal. If you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off. Forgetting to turn off the alarm will eventully lead the camera to send out notifications every minute that the alarm is active. Not all cameras will behave the same. **Do not forget to turn the lights off.**
+Once you have verified operations using the driver device page, create a simple test rule to trigger an alarm using one of your security sensors.
+
+To run the Alarm On/Off and Enable/Disable commmands from Basic rules or RM, select the action type to _run... custom commands_ and then select Actuator devices.
+
+Create test rules to Enable/Disable features when mode changes. You can be selective. 
+
+Create an action in HSM to turn on or off the camera when arming or disarming.
+
+And then, 
+
+**IMPORTANT:** Do not forget to turn the Alarm OFF in your rules when conditions go back to normal. If you have a rule with (conditions=true) that turns it on, you need a second rule with (conditions=false) to turn it off. Forgetting to turn off the alarm will eventully lead the camera to send out notifications every minute that the alarm is active. Not all cameras will behave the same. **Do not forget to turn the lights off.**
 
 Note: By design, the Alarm Input Handling event is NOT included by default when running On/Off or Enable/Disable commands with no filter (i.e. switch "all available"). You need to control the enabled/disabled state of that event separately.
 
