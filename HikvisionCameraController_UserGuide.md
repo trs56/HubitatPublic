@@ -87,7 +87,7 @@ For cameras connected to the NVR POE subnet, use the ip address of the NVR and t
 
 Whenever you Save Preferences, the driver will validate your camera by performing these tests:
 1. Ping the ip address to see if it is online.
-2. If online, send a HTTP GET request to get the data from **ipaddress:port/ISAPI/System/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials. You can do the same with all of the GET PATHS you see in the log.)
+2. If online, send a GET request to **http://ipaddress:port/ISAPI/System/deviceInfo** using the Credentials you entered. (Tip: This is something you can do yourself in a browser window. The browser will prompt you for your credentials. You can do the same with all of the GET PATHS you see in the log.)
 3. If ok, compare the camera name on the camera with the name you entered.
 
 When these checks fail, zStatus will display an error message. If you can't get past this step, please call the help desk to report that you have a Hikvision camera that is not being recognized (see below).
