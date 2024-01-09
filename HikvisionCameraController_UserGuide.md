@@ -1,5 +1,5 @@
 # Hikvision Camera Controller for Hubitat Elevation
-# User Guide - R1.0
+# User Guide - R1.0 - Work In Progress
 **Copyright:** 2024 Thomas R Schmidt, Wildwood IL   
 Unauthorized copy or publication is prohibited.
 ## Prerequisites
